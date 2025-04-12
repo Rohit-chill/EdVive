@@ -13,77 +13,75 @@
       font-family: Arial, sans-serif;
     }
 
-    /* অংশ ১: ন্যাভবার */
-    .navbar {
-      background-color: #f0f0f0;
-      padding: 10px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      position: sticky;
-      top: 0;
-      z-index: 1002;
+<!-- অংশ ১: ন্যাভবার -->
+<div class="navbar">
+  <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+  <div class="logo-text">Cadet Bee</div>
+  <div class="profile-icon">🐝</div>
+</div>
+
+<!-- স্ক্রলিং টেক্সট (ন্যাভবারের নিচে স্পষ্টভাবে) -->
+<div class="scroll-box">
+  <div class="scroll-text">
+    বাংলাদেশের একমাত্র ক্যাডেট কলেজ ভর্তির গাইডলাইন নির্ভর ওয়েবসাইট।
+  </div>
+</div>
+
+<!-- অংশ ২: সাইড মেনু -->
+<div class="side-menu" id="sideMenu">
+  এই ওয়েবসাইট তৈরির কাজ এখনো চলমান আছে। যেকোনো তথ্য বা ফিচার যোগ করার অনুরোধ পাঠাও rohitsorker8@gmail.com এই ঠিকানায়।
+  <!-- ভবিষ্যতে ফিচার যোগ করা হবে -->
+</div>
+
+<style>
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #ffffff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 1000;
+  }
+
+  .scroll-box {
+    position: fixed;
+    top: 85px; /* আগের থেকে নিচে */
+    width: 100%;
+    overflow: hidden;
+    background-color: #f0f0f0;
+    padding: 10px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    z-index: 999;
+  }
+
+  .scroll-text {
+    display: inline-block;
+    white-space: nowrap;
+    animation: scroll-left 15s linear infinite;
+    font-size: 16px;
+    color: #333;
+    padding-left: 100%;
+  }
+
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(0%);
     }
-
-    .menu-icon {
-      font-size: 24px;
-      cursor: pointer;
-      z-index: 1001;
-      position: relative;
+    100% {
+      transform: translateX(-100%);
     }
+  }
 
-    .profile-icon {
-      font-size: 20px;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background-color: #e0e0e0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      user-select: none;
-    }
-
-    .logo-text {
-      font-family: 'Pacifico', cursive;
-      font-size: 28px;
-      color: #333;
-    }
-
-    /* অংশ ২: সাইড মেনু */
-    .side-menu {
-      position: fixed;
-      top: 0;
-      left: -50%;
-      width: 50%;
-      height: 100%;
-      background-color: #f9f9f9;
-      box-shadow: 2px 0 5px rgba(0,0,0,0.2);
-      padding: 80px 10px 20px;
-      z-index: 999;
-      transition: left 0.3s ease;
-    }
-
-    .side-menu.active {
-      left: 0;
-    }
-
-    .side-menu h4 {
-      font-size: 16px;
-      margin: 20px 0;
-      padding: 8px;
-      text-align: center;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-
-    .side-menu a {
-      text-decoration: none;
-      color: #000;
-        }
-
+  body {
+    padding-top: 140px; /* উপরের অংশের নিচে কনটেন্ট বসাতে */
+  }
+</style>
     /* অংশ ৩: হোম স্ক্রিন স্লট */
     .card-button {
       display: block;
