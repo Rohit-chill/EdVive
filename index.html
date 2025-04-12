@@ -1,0 +1,192 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadet Bee</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+    body {
+      margin: 0;
+      background-color: #ffffff;
+      font-family: Arial, sans-serif;
+    }
+
+    /* ন্যাভবার */
+    .navbar {
+      background-color: #f0f0f0;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 3000;
+    }
+
+    .menu-icon {
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 3001;
+      position: relative;
+    }
+
+    .profile-icon {
+      font-size: 20px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+    }
+
+    .logo-text {
+      font-family: 'Pacifico', cursive;
+      font-size: 28px;
+      color: #333;
+    }
+
+    /* নিউজ স্ক্রল (লকড + অ্যানিমেটেড) */
+    .news-scroll-box {
+      position: sticky;
+      top: 71.5px; /* ন্যাভবারের নিচে */
+      background-color: #e9f5ff;
+      overflow: hidden;
+      padding: 10px 0;
+      z-index: 1000;
+    }
+
+    .news-scroll-text {
+      display: inline-block;
+      white-space: nowrap;
+      animation: scroll-right 13s linear infinite;
+      font-size: 15px;
+      color: #333;
+      padding-left: 100%;
+    }
+
+    @keyframes scroll-right {
+      0% {
+        transform: translateX(0%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
+    /* সাইড মেনু */
+    .side-menu {
+      position: fixed;
+      top: 0;
+      left: -50%;
+      width: 50%;
+      height: 100%;
+      background-color: #f9f9f9;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+      padding: 80px 10px 20px;
+      z-index: 2000;
+      transition: left 0.3s ease;
+    }
+
+    .side-menu.active {
+      left: 0;
+    }
+
+    .side-menu h4 {
+      font-size: 16px;
+      margin: 20px 0;
+      padding: 8px;
+      text-align: center;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .side-menu a {
+      text-decoration: none;
+      color: #000;
+    }
+
+    /* হোম স্ক্রিন স্লট */
+    .card-button {
+      display: block;
+      text-decoration: none;
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 20px auto;
+      width: 90%;
+      max-width: 800px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+
+    .card-button:hover {
+      transform: scale(1.02);
+    }
+
+    .card-image {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .card-text {
+      padding: 12px;
+      background-color: #f5f5f5;
+      text-align: center;
+      font-size: 16px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ন্যাভবার -->
+  <div class="navbar">
+    <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+    <div class="logo-text">Cadet Bee</div>
+    <div class="profile-icon">🐝</div>
+  </div>
+
+  <!-- নিউজ স্ক্রল (লকড) -->
+  <div class="news-scroll-box">
+    <div class="news-scroll-text">
+     বাংলাদেশের একমাত্র ক্যাডেট কলেজ ভর্তি পরীক্ষার গাইডলাইন বিষয়ক ওয়েবসাইটে স্বাগতম। এই ওয়েবসাইট তৈরির কাজ এখনো শেষ হয়নি। তোমার অভিযোগ/মতামত/পরামর্শ rohitsorker8@gmail.com এই ঠিকানায় পাঠাও।
+    </div>
+  </div>
+
+  <!-- সাইড মেনু -->
+  <div class="side-menu" id="sideMenu">
+    এই ওয়েবসাইট তৈরির কাজ এখনো চলমান আছে। যেকোনো তথ্য বা ফিচার যোগ করার অনুরোধ পাঠাও rohitsorker8@gmail.com এই ঠিকানায়।
+  </div>
+
+  <!-- হোম স্লট -->
+  <a href="CCATInfo.html" class="card-button">
+    <img src="Cadet_College.jpg" alt="ক্যাডেট কলেজ" class="card-image">
+    <div class="card-text">ক্যাডেট কলেজ কাকে বলে ? </div>
+  </a>
+
+  <a href="ccwrittentest.html" class="card-button">
+    <img src="cadet_written.jpg" alt="ক্যাডেট কলেজ লিখিত পরীক্ষা" class="card-image">
+    <div class="card-text">ক্যাডেট কলেজ লিখিত ভর্তি পরীক্ষার টিপস ও ট্রিকস - ক্যাডেট রহিত </div>
+  </a>
+
+  <a href="bestcoaching.html" class="card-button">
+    <img src="MCC.jpg" class="card-image">
+    <div class="card-text"> ক্যাডেট ভর্তি প্রস্তুতির জন্য সেরা ক্যাডেট কোচিং কোনটি ? </div>
+  </a>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('sideMenu');
+      menu.classList.toggle('active');
+    }
+  </script>
+
+</body>
+</html>
