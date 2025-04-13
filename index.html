@@ -237,68 +237,38 @@
   </div>
 
   <!-- স্ক্রিপ্ট -->
-  <script>
-    function toggleMenu() {
-      document.getElementById('sideMenu').classList.toggle('active');
-    }
+<script>
+  function searchArticles() {
+    const input = document.getElementById('searchInput').value.trim().toLowerCase();
+    const resultsBox = document.getElementById('resultsBox');
+    resultsBox.innerHTML = '';
+    if (!input) return;
 
-    function toggleSearch() {
-      const box = document.getElementById('searchBox');
-      box.style.display = (box.style.display === 'block') ? 'none' : 'block';
-      if (box.style.display === 'block') {
-        document.getElementById('searchInput').focus();
+    const data = {
+      "ক্যাডেট কলেজ কাকে বলে ?": "CCATInfo.html",
+      "ক্যাডেট কলেজ লিখিত ভর্তি পরীক্ষার টিপস ও ট্রিকস - ক্যাডেট রহিত": "ccwrittentest.html",
+      "ক্যাডেট ভর্তি প্রস্তুতির জন্য সেরা ক্যাডেট কোচিং কোনটি ?": "bestcoaching.html"
+    };
+
+    let found = false;
+
+    for (const [title, link] of Object.entries(data)) {
+      if (title.toLowerCase().includes(input)) {
+        const result = document.createElement('div');
+        result.textContent = title;
+        result.onclick = () => {
+          window.location.href = link; // লিংক অনুসারে রিডাইরেক্ট করা
+        };
+        resultsBox.appendChild(result);
+        found = true;
       }
     }
 
-    function searchArticles() {
-      const input = document.getElementById('searchInput').value.trim().toLowerCase();
-      const resultsBox = document.getElementById('resultsBox');
-      resultsBox.innerHTML = '';
-      if (!input) return;
-
-      const dataDiv = document.getElementById('keywords-data');
-      const data = JSON.parse(dataDiv.textContent || dataDiv.innerText);
-      let found = false;
-
-      for (const [title, content] of Object.entries(data)) {
-        if (title.toLowerCase().includes(input) || content.toLowerCase().includes(input)) {
-          const result = document.createElement('div');
-          result.textContent = title;
-          result.onclick = (event) => {
-  const clickedText = event.target.textContent.trim();
-
-  for (const card of document.querySelectorAll('.card-button')) {
-    const cardTitle = card.querySelector('.card-text')?.textContent.trim();
-
-    if (cardTitle === clickedText) {
-      // যদি card টা <a> হয়
-      if (card.tagName.toLowerCase() === 'a' && card.href) {
-        window.location.href = card.href;
-      } 
-      // যদি card এর মধ্যে <a> থাকে
-      else {
-        const link = card.querySelector('a');
-        if (link?.href) {
-          window.location.href = link.href;
-        } else {
-          card.click(); // fallback
-        }
-      }
-      return;
+    if (!found) {
+      resultsBox.innerHTML = "<div>কোনো ফলাফল পাওয়া যায়নি।</div>";
     }
   }
-
-  alert("লিংক পাওয়া যায়নি।");
-};
-          resultsBox.appendChild(result);
-          found = true;
-        }
-      }
-      if (!found) {
-        resultsBox.innerHTML = "<div>কোনো ফলাফল পাওয়া যায়নি।</div>";
-      }
-    }
-  </script>
+</script>
 
 </body>
 </html>
