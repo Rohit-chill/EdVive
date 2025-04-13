@@ -264,14 +264,32 @@
         if (title.toLowerCase().includes(input) || content.toLowerCase().includes(input)) {
           const result = document.createElement('div');
           result.textContent = title;
-          result.onclick = () => {
-            const link = document.querySelector(`.card-button .card-text:contains("${title}")`);
-            if (link) {
-              link.closest('a').click();
-            } else {
-              alert("লিংক পাওয়া যায়নি।");
-            }
-          };
+          result.onclick = (event) => {
+  const clickedText = event.target.textContent.trim();
+
+  for (const card of document.querySelectorAll('.card-button')) {
+    const cardTitle = card.querySelector('.card-text')?.textContent.trim();
+
+    if (cardTitle === clickedText) {
+      // যদি card টা <a> হয়
+      if (card.tagName.toLowerCase() === 'a' && card.href) {
+        window.location.href = card.href;
+      } 
+      // যদি card এর মধ্যে <a> থাকে
+      else {
+        const link = card.querySelector('a');
+        if (link?.href) {
+          window.location.href = link.href;
+        } else {
+          card.click(); // fallback
+        }
+      }
+      return;
+    }
+  }
+
+  alert("লিংক পাওয়া যায়নি।");
+};
           resultsBox.appendChild(result);
           found = true;
         }
