@@ -1,0 +1,285 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadet Bee</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+    body {
+      margin: 0;
+      background-color: #ffffff;
+      font-family: 'Hind Siliguri', Arial, sans-serif;
+    }
+
+    .navbar {
+      background-color: #f0f0f0;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 3000;
+    }
+
+    .search-button {
+      font-size: 20px;
+      background-color: #e0e0e0;
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .logo-text {
+      font-family: 'Pacifico', cursive;
+      font-size: 28px;
+      color: #333;
+    }
+
+    .news-scroll-box {
+      position: sticky;
+      top: 71.5px;
+      background-color: #e9f5ff;
+      overflow: hidden;
+      padding: 10px 0;
+      z-index: 1000;
+    }
+
+    .news-scroll-text {
+      display: inline-block;
+      white-space: nowrap;
+      animation: scroll-right 13s linear infinite;
+      font-size: 15px;
+      color: #333;
+      padding-left: 100%;
+    }
+
+    @keyframes scroll-right {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    .side-menu {
+      position: fixed;
+      top: 0;
+      left: -50%;
+      width: 50%;
+      height: 100%;
+      background-color: #f9f9f9;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+      padding: 80px 10px 20px;
+      z-index: 2000;
+      transition: left 0.3s ease;
+    }
+
+    .side-menu.active {
+      left: 0;
+    }
+
+    .side-menu h4 {
+      font-size: 16px;
+      margin: 20px 0;
+      padding: 8px;
+      text-align: center;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .side-menu a {
+      text-decoration: none;
+      color: #000;
+    }
+
+    .card-button {
+      display: block;
+      text-decoration: none;
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 20px auto;
+      width: 90%;
+      max-width: 800px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+
+    .card-button:hover {
+      transform: scale(1.02);
+    }
+
+    .card-image {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .card-text {
+      padding: 12px;
+      background-color: #f5f5f5;
+      text-align: center;
+      font-size: 16px;
+      color: #333;
+    }
+
+    .search-bar-container {
+      display: none;
+      position: fixed;
+      top: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 500px;
+      background-color: #fff;
+      padding: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      z-index: 4000;
+      border-radius: 8px;
+    }
+
+    .search-bar-container input {
+      width: 85%;
+      padding: 8px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .search-bar-container button {
+      background: none;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      margin-left: 8px;
+    }
+
+    .search-results {
+      margin-top: 10px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .search-results div {
+      padding: 6px 10px;
+      background-color: #f9f9f9;
+      border-bottom: 1px solid #ddd;
+      cursor: pointer;
+    }
+
+    .search-results div:hover {
+      background-color: #e0f7ff;
+    }
+
+    .hidden-keywords {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ন্যাভবার -->
+  <div class="navbar">
+    <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+    <div class="logo-text">Cadet Bee</div>
+    <button class="search-button" onclick="toggleSearch()">🔎</button>
+  </div>
+
+  <!-- নিউজ স্ক্রল -->
+  <div class="news-scroll-box">
+    <div class="news-scroll-text">
+      বাংলাদেশের একমাত্র ক্যাডেট কলেজ ভর্তি পরীক্ষার গাইডলাইন বিষয়ক ওয়েবসা[...]
+    </div>
+  </div>
+
+  <!-- সার্চ বার -->
+  <div class="search-bar-container" id="searchBox">
+    <input type="text" id="searchInput" placeholder="সার্চ করো..." onkeyup="searchArticles()">
+    <button onclick="toggleSearch()">×</button>
+    <div class="search-results" id="resultsBox"></div>
+  </div>
+
+  <!-- সাইড মেনু -->
+  <div class="side-menu" id="sideMenu">
+    এই ওয়েবসাইট তৈরির কাজ এখনো চলমান আছে। যেকোনো তথ্য বা ফিচার যোগ করার অনুরো[...]
+  </div>
+
+  <!-- হোম স্লট -->
+  <a href="CCATInfo.html" class="card-button">
+    <img src="Cadet_College.jpg" alt="ক্যাডেট কলেজ" class="card-image">
+    <div class="card-text">ক্যাডেট কলেজ কাকে বলে ?</div>
+  </a>
+
+  <a href="ccwrittentest.html" class="card-button">
+    <img src="cadet_written.jpg" alt="ক্যাডেট কলেজ লিখিত পরীক্ষা" class="card-image">
+    <div class="card-text">ক্যাডেট কলেজ ভর্তির লিখিত পরীক্ষার টিপস ও ট্রিকস - ক্যাডেট রহিত</div>
+  </a>
+
+  <a href="bestcoaching.html" class="card-button">
+    <img src="MCC.jpg" class="card-image">
+    <div class="card-text">ক্যাডেট ভর্তি প্রস্তুতির জন্য সেরা ক্যাডেট কোচিং কোনটি ?</div>
+  </a>
+
+  <!-- লুকানো কিওয়ার্ড ব্লক -->
+<div class="hidden-keywords" id="keywords-data">
+  {
+    "ক্যাডেট কলেজ কাকে বলে ?": {
+      "href": "CCATInfo.html",
+      "content": "যুদ্ধবিদ্যা অর্জনকারী প্রশিক্ষণরত শিক্ষার্থীগণ ক্যাডেট বলে পরিচিত। সেই ক্যাডেট তৈরির জন্য যে কলেজ তাকে ক্যাডেট কলেজ বলা হয়। বাংলাদেশে মোট ১২ টি ক্যাডেট কলেজ রয়েছে। এরমধ্যে ৯ টি ছেলেদের জন্য ও ৩ টি মেয়েদের জন্য নির্ধারিত। ক্যাডেট কলেজ সামরিক বাহিনী পরিচালিত বিশেষ ধরনের শিক্ষা প্রতিষ্ঠান। এই ধরনের শিক্ষাপ্রতিষ্ঠানের ধারণা সৃষ্টি হয়েছিল সামরিক বাহিনীতে যোগ্য কর্মকর্তা তৈরীর চেতনা থেকে। অটো ভন বিসমার্ক এর যুগে জার্মানিতে প্রথম ক্যাডেট কলেজ ব্যবস্থা প্রবর্তিত হয়। সামরিক বাহিনীতে যোগ্য কর্মকর্তা তৈরিতে অল্প বয়স থেকেই প্রশিক্ষণ শুরু করানোটা বিশেষ গুরুত্ব বহন করতে পারে। এই ধারণাই তৎকালীন ক্যাডেট কলেজ পদ্ধতির চালিকাশক্তি ছিল। পরবর্তীকালে নেপোলিয়ন এর যুগে ফ্রান্সে সামরিক দক্ষতা বৃদ্ধির একটি অন্যতম উপাদান হিসেবে ক্যাডেট কলেজ পদ্ধতি গৃহীত হয়। পরবর্তীকালে নেপোলিয়ন ফ্রান্সে এই ব্যবস্থা চালু করেন এবং সর্বশেষ পাকিস্তান ও তৎকালীন পূর্ব পাকিস্তানে এই শিক্ষা ব্যবস্থা প্রবর্তিত হয়। ক্যাডেট কলেজ বলতে বিশেষ ধরনের সামরিক স্কুল বোঝালেও সকল সামরিক স্কুল বা শিক্ষা প্রতিষ্ঠানকে ক্যাডেট কলেজ বলা যাবে না। কেবল বাংলাদেশ ও পাকিস্তানেই এই নামটি ব্যবহৃত হয়ে থাকে। বর্তমানে ক্যাডেট কলেজ সমূহ প্রতিরক্ষা মন্ত্রণালয়ের আওতাধীন মাধ্যমিক ও উচ্চ মাধ্যমিক পর্যায়ের স্বায়ত্তশাসিত আবাসিক শিক্ষা প্রতিষ্ঠান। ১৯৫৮ সালে ইস্ট পাকিস্তান ক্যাডেট কলেজ প্রতিষ্ঠার মাধ্যমে তৎকালীন পাকিস্তান আমলে ক্যাডেট কলেজের যাত্রা শুরু হয়। বাংলাদেশের ১২ টি ক্যাডেট কলেজের তালিকা নিচে দেওয়া হলো: ফৌজদারহাট ক্যাডেট কলেজ, ঝিনাইদহ ক্যাডেট কলেজ, মির্জাপুর ক্যাডেট কলেজ, রাজশাহী ক্যাডেট কলেজ, সিলেট ক্যাডেট কলেজ, রংপুর ক্যাডেট কলেজ, বরিশাল ক্যাডেট কলেজ, পাবনা ক্যাডেট কলেজ, কুমিল্লা ক্যাডেট কলেজ, ময়মনসিংহ গার্লস ক্যাডেট কলেজ, ফেনী গার্লস ক্যাডেট কলেজ, জয়পুরহাট গার্লস ক্যাডেট কলেজ। ইউটিউবে বিভিন্ন ক্যাডেট কলেজের ডকুমেন্টারি ভিডিও দেখতে 'দেখুন' বাটনে ক্লিক করো।"
+    }
+  }
+</div>
+
+  <!-- স্ক্রিপ্ট -->
+  <script>
+    function toggleMenu() {
+      document.getElementById('sideMenu').classList.toggle('active');
+    }
+
+    function toggleSearch() {
+      const box = document.getElementById('searchBox');
+      box.style.display = (box.style.display === 'block') ? 'none' : 'block';
+      if (box.style.display === 'block') {
+        document.getElementById('searchInput').focus();
+      }
+    }
+
+    function searchArticles() {
+      const input = document.getElementById('searchInput').value.trim().toLowerCase();
+      const resultsBox = document.getElementById('resultsBox');
+      resultsBox.innerHTML = '';
+      if (!input) return;
+
+      // হিডেন ডিভ থেকে ডেটা বের করা
+      const hiddenKeywordsDiv = document.getElementById('keywords-data');
+      const data = JSON.parse(hiddenKeywordsDiv.textContent.trim());
+
+      let found = false;
+
+      for (const [title, { href, content }] of Object.entries(data)) {
+        if (title.toLowerCase().includes(input) || content.toLowerCase().includes(input)) {
+          const result = document.createElement('div');
+          result.textContent = title;
+          result.onclick = () => {
+            window.location.href = href; // লিংক অনুসারে রিডাইরেক্ট করা
+          };
+          resultsBox.appendChild(result);
+          found = true;
+        }
+      }
+
+      if (!found) {
+        resultsBox.innerHTML = "<div>কোনো ফলাফল পাওয়া যায়নি।</div>";
+      }
+    }
+  </script>
+
+</body>
+</html>
