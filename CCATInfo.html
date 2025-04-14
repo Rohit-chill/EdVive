@@ -1,0 +1,292 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ক্যাডেট কলেজ ভর্তি পরীক্ষা</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+    body {
+      margin: 0;
+      background-color: #ffffff;
+      font-family: 'Hind Siliguri', Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    #loader-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100%;
+      background: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 9999;
+    }
+
+    .progress-bar {
+      width: 300px;
+      height: 30px;
+      background: #ddd;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background-color: #4CAF50;
+      transition: width 0.2s ease;
+    }
+
+    .progress-text {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+    }
+
+    #main-content {
+      display: none;
+    }
+
+    .navbar {
+      background-color: #f0f0f0;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+    }
+
+    .back-button {
+      font-size: 20px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: #000;
+      font-weight: bold;
+    }
+
+    .logo-text {
+      font-family: 'Pacifico', cursive;
+      font-size: 28px;
+      color: #333;
+    }
+
+    .profile-icon {
+      font-size: 20px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    .section-title {
+      font-size: 24px;
+      font-weight: bold;
+      border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .image-slot {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .image-slot img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .article-text {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .foldable {
+      margin-bottom: 15px;
+    }
+
+    .fold-header {
+      font-weight: bold;
+      background-color: #f2f2f2;
+      border-radius: 5px;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .fold-toggle {
+      font-size: 18px;
+    }
+
+    .fold-content {
+      display: none;
+      padding: 10px;
+      background-color: #fafafa;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-top: 5px;
+    }
+
+    .footer {
+      font-size: 14px;
+      color: #444;
+      margin-top: 30px;
+      padding: 10px;
+      border-top: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+
+<div id="loader-container">
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill"></div>
+    <div class="progress-text" id="progressText">0%</div>
+  </div>
+</div>
+
+<div id="main-content">
+  <div class="navbar">
+    <a href="index.html" class="back-button">×</a>
+    <div class="logo-text">Cadet Bee</div>
+    <div class="profile-icon">🐝</div>
+  </div>
+
+  <div class="container">
+    <div class="section-title">ক্যাডেট কলেজ কাকে বলে ?</div>
+
+    <div class="image-slot">
+      <img src="Cadet_logo.jpg">
+    </div>
+
+    <div class="article-text">
+      যুদ্ধবিদ্যা অর্জনকারী প্রশিক্ষণরত শিক্ষার্থীগণ ক্যাডেট বলে পরিচিত। সেনাবাহিনীতে যোগদানের জন্য ক্যাডেট কলেজ থেকে শিক্ষার্থীদের প্রশিক্ষণ দেওয়া হয়। 
+      ৭ম শ্রেণীতে ক্যাডেট ভর্তির জন্য প্রতিবছরের শুরুতে একটি ভর্তি পরীক্ষা অনুষ্ঠিত হয়। 
+    </div>
+
+    <div class="foldable">
+      <div class="fold-header" onclick="toggleFold(this)">
+        <span>১. ক্যাডেট কলেজ ধারণার ইতিহাস :</span>
+        <span class="fold-toggle">+</span>
+      </div>
+      <div class="fold-content">
+      ক্যাডেট কলেজ সামরিক বাহিনী পরিচালিত বিশেষ ধরনের শিক্ষা প্রতিষ্ঠান। এই ধরনের প্রতিষ্ঠান অটো ভন বিসমার্ক এর যুগে জার্মানিতে প্রথম প্রবর্তিত হয়েছিল। 
+        ক্যাডেট কলেজ বলতে বিশেষ ধরনের সামরিক স্কুল বোঝালেও সকল সামরিক স্কুল বা প্রতিষ্ঠান ক্যাডেট কলেজ নয়। 
+      </div>
+    </div>
+
+    <div class="foldable">
+      <div class="fold-header" onclick="toggleFold(this)">
+        <span>২. ১২ টি ক্যাডেট কলেজের তালিকা :</span>
+        <span class="fold-toggle">+</span>
+      </div>
+      <div class="fold-content">
+        বাংলাদেশের ১২ টি ক্যাডেট কলেজের তালিকা নিচে দেওয়া হলো ↓<br><br>
+        ১. ফৌজদারহাট ক্যাডেট কলেজ।<br>
+        ২. ঝিনাইদহ ক্যাডেট কলেজ।<br>
+        ৩. মির্জাপুর ক্যাডেট কলেজ।<br>
+        ৪. রাজশাহী ক্যাডেট কলেজ।<br>
+        ৫. সিলেট ক্যাডেট কলেজ।<br>
+        ৬. রংপুর ক্যাডেট কলেজ।<br>
+        ৭. বরিশাল ক্যাডেট কলেজ।<br>
+        ৮. পাবনা ক্যাডেট কলেজ।<br>
+        ৯. কুমিল্লা ক্যাডেট কলেজ।<br>
+        ১০. ময়মনসিংহ গার্লস ক্যাডেট কলেজ।<br>
+        ১১. ফেনী গার্লস ক্যাডেট কলেজ।<br>
+        ১২. জয়পুরহাট গার্লস ক্যাডেট কলেজ।
+      </div>
+    </div>
+
+    <div class="foldable">
+      <div class="fold-header" onclick="toggleFold(this)">
+        <span>৩. সকল ক্যাডেট কলেজের ডকুমেন্টারি :</span>
+        <span class="fold-toggle">+</span>
+      </div>
+      <div class="fold-content">
+      ইউটিউবে বিভিন্ন ক্যাডেট কলেজের ডকুমেন্টারি ভিডিও দেখতে "দেখুন" বাটনে ক্লিক করুন।<br><br>
+        <p>১. ফৌজদারহাট ক্যাডেট কলেজ : <a href="https://youtu.be/pZN7-iYikJo?si=ngkWfTuitM20fGnX" target="_blank">দেখুন</a></p>
+        <p>২. ঝিনাইদহ ক্যাডেট কলেজ : <a href="https://youtu.be/rC4zd5zmrrg?si=9CrqxdrW2NpeEuJi" target="_blank">দেখুন</a></p>
+        <p>৩. মির্জাপুর ক্যাডেট কলেজ : <a href="https://youtu.be/yfhKh-cF7kQ?si=QsllGWVCbpnKoSY0" target="_blank">দেখুন</a></p>
+        <p>৪. রাজশাহী ক্যাডেট কলেজ : <a href="https://youtu.be/1Gt3NpvUZXM?si=IM0vVYPpWWk5WccN" target="_blank">দেখুন</a></p>
+        <p>৫. সিলেট ক্যাডেট কলেজ : <a href="https://youtu.be/FmTF8KQSuFw?si=rOOUpits4eelQJjf" target="_blank">দেখুন</a></p>
+        <p>৬. রংপুর ক্যাডেট কলেজ : <a href="https://youtu.be/DF3oGZ6wxC8?si=sm5o7UlbpUwzBIuq" target="_blank">দেখুন</a></p>
+        <p>৭. বরিশাল ক্যাডেট কলেজ : <a href="https://youtu.be/lHWytktCFUY?si=t3yVeCkCtSMPSGj1" target="_blank">দেখুন</a></p>
+        <p>৮. পাবনা ক্যাডেট কলেজ : <a href="https://youtu.be/FFd4sqIW9N0?si=ybT0O1M39la2KjlB" target="_blank">দেখুন</a></p>
+        <p>৯. কুমিল্লা ক্যাডেট কলেজ : <a href="https://youtu.be/VbT3Z9IgVIE?si=4RwjQLeeQi25Gnfd" target="_blank">দেখুন</a></p>
+        <p>১০. ময়মনসিংহ গার্লস ক্যাডেট কলেজ : <a href="https://youtu.be/zCoq2If7ndM?si=0zhuyY6_I2VoL5ya" target="_blank">দেখুন</a></p>
+        <p>১১. ফেনী গার্লস ক্যাডেট কলেজ : <a href="https://youtu.be/OqcTauFsjIw?si=SoHaaGrRCqjtwVoD" target="_blank">দেখুন</a></p>
+        <p>১২. জয়পুরহাট গার্লস ক্যাডেট কলেজ : N/A</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      ✍️ লিখেছেন : ক্যাডেট রহিত (SCC, C no. 2619)<br>
+      ⏫ সর্বশেষ সম্পাদনা : ১২ এপ্রিল, ২০২৫ <br><br>
+      📢 Announcement : এই ওয়েবসাইট তৈরির কাজ এখনও শেষ হয়নি। তোমার অভিযোগ/মতামত/অনুরোধ জানাতে আমাদের সাথে যোগাযোগ করো।
+    </div>
+  </div>
+</div>
+
+<script>
+  let progress = 0;
+  const fill = document.getElementById('progressFill');
+  const text = document.getElementById('progressText');
+  const loader = document.getElementById('loader-container');
+  const content = document.getElementById('main-content');
+
+  const loading = setInterval(() => {
+    if (progress >= 100) {
+      clearInterval(loading);
+      loader.style.display = 'none';
+      content.style.display = 'block';
+    } else {
+      progress++;
+      fill.style.width = progress + '%';
+      text.textContent = progress + '%';
+    }
+  }, 30);
+
+  function toggleFold(element) {
+    const content = element.nextElementSibling;
+    const toggle = element.querySelector('.fold-toggle');
+    const isOpen = content.style.display === 'block';
+    content.style.display = isOpen ? 'none' : 'block';
+    toggle.textContent = isOpen ? '+' : '−';
+  }
+</script>
+
+</body>
+</html>
