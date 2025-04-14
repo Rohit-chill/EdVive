@@ -238,6 +238,17 @@
 
   <!-- স্ক্রিপ্ট -->
 <script>
+  function toggleMenu() {
+      document.getElementById('sideMenu').classList.toggle('active');
+    }
+
+    function toggleSearch() {
+      const box = document.getElementById('searchBox');
+      box.style.display = (box.style.display === 'block') ? 'none' : 'block';
+      if (box.style.display === 'block') {
+        document.getElementById('searchInput').focus();
+      }
+  }
   function searchArticles() {
     const input = document.getElementById('searchInput').value.trim().toLowerCase();
     const resultsBox = document.getElementById('resultsBox');
