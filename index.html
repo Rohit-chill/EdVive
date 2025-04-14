@@ -250,35 +250,34 @@
       }
   }
   function searchArticles() {
-    const input = document.getElementById('searchInput').value.trim().toLowerCase();
-    const resultsBox = document.getElementById('resultsBox');
-    resultsBox.innerHTML = '';
-    if (!input) return;
+  const input = document.getElementById('searchInput').value.trim().toLowerCase();
+  const resultsBox = document.getElementById('resultsBox');
+  resultsBox.innerHTML = '';
+  if (!input) return;
 
-    const data = {
-      "ক্যাডেট কলেজ কাকে বলে ?": "CCATInfo.html",
-      "ক্যাডেট কলেজ লিখিত ভর্তি পরীক্ষার টিপস ও ট্রিকস - ক্যাডেট রহিত": "ccwrittentest.html",
-      "ক্যাডেট ভর্তি প্রস্তুতির জন্য সেরা ক্যাডেট কোচিং কোনটি ?": "bestcoaching.html"
-    };
+  // হিডেন ডিভ থেকে ডেটা বের করা
+  const hiddenKeywordsDiv = document.getElementById('keywords-data');
+  const data = JSON.parse(hiddenKeywordsDiv.textContent.trim());
 
-    let found = false;
+  let found = false;
 
-    for (const [title, link] of Object.entries(data)) {
-      if (title.toLowerCase().includes(input)) {
-        const result = document.createElement('div');
-        result.textContent = title;
-        result.onclick = () => {
-          window.location.href = link; // লিংক অনুসারে রিডাইরেক্ট করা
-        };
-        resultsBox.appendChild(result);
-        found = true;
-      }
-    }
-
-    if (!found) {
-      resultsBox.innerHTML = "<div>কোনো ফলাফল পাওয়া যায়নি।</div>";
+  for (const [title, link] of Object.entries(data)) {
+    if (title.toLowerCase().includes(input)) {
+      const result = document.createElement('div');
+      result.textContent = title;
+      result.onclick = () => {
+        window.location.href = link; // লিংক অনুসারে রিডাইরেক্ট করা
+      };
+      resultsBox.appendChild(result);
+      found = true;
     }
   }
+
+  if (!found) {
+    resultsBox.innerHTML = "<div>কোনো ফলাফল পাওয়া যায়নি।</div>";
+  }
+  }
+  
 </script>
 
 </body>
