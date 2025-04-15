@@ -1,0 +1,251 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html><html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadet Bee</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');body {
+  margin: 0;
+  background-color: #ffffff;
+  font-family: 'Hind Siliguri', Arial, sans-serif;
+}
+
+.navbar {
+  background-color: #f0f0f0;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 3000;
+}
+
+.search-button {
+  font-size: 20px;
+  background-color: #e0e0e0;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.logo-text {
+  font-family: 'Pacifico', cursive;
+  font-size: 28px;
+  color: #333;
+}
+
+.news-scroll-box {
+  position: sticky;
+  top: 71.5px;
+  background-color: #e9f5ff;
+  overflow: hidden;
+  padding: 10px 0;
+  z-index: 1000;
+}
+
+.news-scroll-text {
+  display: inline-block;
+  white-space: nowrap;
+  animation: scroll-right 15s linear infinite;
+  font-size: 15px;
+  color: #333;
+  padding-left: 100%;
+}
+
+@keyframes scroll-right {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-100%); }
+}
+
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: -50%;
+  width: 50%;
+  height: 100%;
+  background-color: #f9f9f9;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+  padding: 80px 10px 20px;
+  z-index: 2000;
+  transition: left 0.3s ease;
+}
+
+.side-menu.active {
+  left: 0;
+}
+
+.side-menu h4 {
+  font-size: 16px;
+  margin: 20px 0;
+  padding: 8px;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.side-menu a {
+  text-decoration: none;
+  color: #000;
+}
+
+.card-button {
+  display: block;
+  text-decoration: none;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 20px auto;
+  width: 90%;
+  max-width: 800px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+
+.card-button:hover {
+  transform: scale(1.02);
+}
+
+.card-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.card-text {
+  padding: 12px;
+  background-color: #f5f5f5;
+  text-align: center;
+  font-size: 16px;
+  color: #333;
+}
+
+.search-bar-container {
+  display: none;
+  position: fixed;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 500px;
+  background-color: #fff;
+  padding: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  z-index: 4000;
+  border-radius: 8px;
+}
+
+.search-bar-container input {
+  width: 85%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.search-bar-container button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+.search-results {
+  margin-top: 10px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.search-results div {
+  padding: 6px 10px;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.search-results div:hover {
+  background-color: #e0f7ff;
+}
+
+.hidden-keywords {
+  display: none;
+}
+
+  </style>
+</head>
+<body>
+  <!-- ন্যাভবার -->
+  <div class="navbar">
+    <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+    <div class="logo-text">Cadet Bee</div>
+    <button class="search-button" onclick="toggleSearch()">🔎</button>
+  </div>  <!-- নিউজ স্ক্রল -->  <div class="news-scroll-box">
+    <div class="news-scroll-text">
+      বাংলাদেশের একমাত্র ক্যাডেট কলেজ ভর্তি পরীক্ষার গাইডলাইন বিষয়ক ওয়েবসাইটে স্বাগতম। এটি সম্পূর্ণ অ্যাড ফ্রি ওয়েবসাইট। এই ওয়েবসাইটের কাজ এখনো শেষ হয়নি। তোমার অভিযোগ/মতামত/পরামর্শ পাঠিয়ে দাও rohitsorker8@gmail.com এই ঠিকানায়।
+    </div>
+  </div>  <!-- সার্চ বার -->  <div class="search-bar-container" id="searchBox">
+    <input type="text" id="searchInput" placeholder="সার্চ করো..." onkeyup="searchArticles()">
+    <button onclick="toggleSearch()">×</button>
+    <div class="search-results" id="resultsBox"></div>
+  </div>  <!-- সাইড মেনু -->  <div class="side-menu" id="sideMenu">
+    এই ওয়েবসাইট তৈরির কাজ এখনো চলমান আছে। যেকোনো তথ্য বা ফিচার যোগ করার অনুরোধ জানাও rohitsorker8@gmail.com এই ঠিকানায়।
+  </div>  <!-- হোম স্লট -->  <a href="CCATInfo.html" class="card-button">
+    <img src="Cadet_College.jpg" alt="ক্যাডেট কলেজ" class="card-image">
+    <div class="card-text">ক্যাডেট কলেজ কাকে বলে ?</div>
+  </a>  <a href="ccwrittentest.html" class="card-button">
+    <img src="ccwrittentest.jpg" alt="ক্যাডেট কলেজের প্যারেডের ছবি" class="card-image">
+    <div class="card-text">কিভাবে ক্যাডেট হওয়া যায় ?</div>
+  </a>  <a href="ashikchowdhury.html" class="card-button">
+    <img src="ashikchowdhurycoverphoto.jpg" class="card-image">
+    <div class="card-text">সিলেট ক্যাডেট কলেজ তথা সারা বাংলাদেশের গর্ব কে এই আশিক চৌধুরী ?</div>
+  </a>  <a href="bestcoaching.html" class="card-button">
+    <img src="MCC.jpg" class="card-image">
+    <div class="card-text">দেশের সেরা ক্যাডেট কোচিং কোনটি ?</div>
+
+
+   </a>
+     <script src="data.js"></script> 
+    <script>
+    function toggleSearch() {
+      const box = document.getElementById('searchBox');
+      box.style.display = box.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function toggleMenu() {
+      document.getElementById('sideMenu').classList.toggle('active');
+    }
+
+    function searchArticles() {
+      const input = document.getElementById('searchInput').value.toLowerCase();
+      const resultsBox = document.getElementById('resultsBox');
+      resultsBox.innerHTML = '';
+
+      const data = [
+        { text: 'ক্যাডেট কলেজ কাকে বলে ?', link: 'CCATInfo.html' },
+        { text: 'কিভাবে ক্যাডেট হওয়া যায় ?', link: 'ccwrittentest.html' },
+        { text: 'সিলেট ক্যাডেট কলেজ তথা সারা বাংলাদেশের গর্ব কে এই আশিক চৌধুরী ?', link: 'ashikchowdhury.html' },
+        { text: 'দেশের সেরা ক্যাডেট কোচিং কোনটি ?', link: 'bestcoaching.html' }
+      ];
+
+      const matches = data.filter(item => item.text.toLowerCase().includes(input));
+
+      matches.forEach(item => {
+        const div = document.createElement('div');
+        div.textContent = item.text;
+        div.onclick = () => location.href = item.link;
+        resultsBox.appendChild(div);
+      });
+    }
+      </script> 
+    <script src="data.js"></script>
+
+</body>
+</html>
