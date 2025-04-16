@@ -1,0 +1,74 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f7f7f7;
+    }
+    #login-button {
+      cursor: pointer;
+      width: 300px;
+      height: 150px;
+    }
+  </style>
+
+  <!-- Firebase Configuration and SDK Initialization -->
+  <script type="module">
+    import { initializeApp } from "firebase/app";
+    import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "firebase/auth";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBAYNwBjPktmf4yfLmZEsXavHgaYn-P1_g",
+      authDomain: "cadet-bee.firebaseapp.com",
+      projectId: "cadet-bee",
+      storageBucket: "cadet-bee.firebasestorage.app",
+      messagingSenderId: "929411572434",
+      appId: "1:929411572434:web:414cfc7b27bdcf467b030b",
+      measurementId: "G-EXWVCN5R16"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const loginButton = document.getElementById("login-button");
+
+    loginButton.addEventListener('click', async () => {
+      const provider = new GoogleAuthProvider();
+      try {
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+
+        // Save user info to localStorage
+        localStorage.setItem("userName", user.displayName);
+        localStorage.setItem("userEmail", user.email);
+        localStorage.setItem("userPhotoURL", user.photoURL);
+
+        // Redirect to the homepage.html after login
+        window.location.href = "homepage.html";
+      } catch (error) {
+        console.error("Error during Google login:", error.message);
+      }
+    });
+
+    // Check if the user is already logged in from localStorage
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, update the UI or redirect
+        window.location.href = "homepage.html";
+      }
+    });
+  </script>
+</head>
+<body>
+  <img id="login-button" src="button.jpg" alt="Login with Google" onclick="loginButton.click()">
+</body>
+</html>
