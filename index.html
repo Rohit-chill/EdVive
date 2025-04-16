@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  
+  <style>
+    /* Center the image on the page */
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f7f7f7;
+    }
+    #login-button {
+      cursor: pointer;
+      width: 300px;
+      height: 150px;
+    }
+  </style>
+
+  <!-- Firebase Configuration and SDK Initialization -->
+  <script type="module">
+    // Import necessary Firebase modules
+    import { initializeApp } from "firebase/app";
+    import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+    import { setCookie, getCookie } from './cookies.js'; // Custom cookie functions (explained below)
+
+    // Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyBAYNwBjPktmf4yfLmZEsXavHgaYn-P1_g",
+      authDomain: "cadet-bee.firebaseapp.com",
+      projectId: "cadet-bee",
+      storageBucket: "cadet-bee.firebasestorage.app",
+      messagingSenderId: "929411572434",
+      appId: "1:929411572434:web:414cfc7b27bdcf467b030b",
+      measurementId: "G-EXWVCN5R16"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Google Login Button
+    const loginButton = document.getElementById("login-button");
+
+    // Google Sign-In
+    loginButton.addEventListener('click', async () => {
+      const provider = new GoogleAuthProvider();
+      try {
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+
+        // Save user info to localStorage (or cookies)
+        localStorage.setItem("userName", user.displayName);
+        localStorage.setItem("userEmail", user.email);
+        localStorage.setItem("userPhotoURL", user.photoURL);
+
+        // Optionally store user info in cookies
+        setCookie('userName', user.displayName, 7);  // Cookie expires in 7 days
+        setCookie('userEmail', user.email, 7);
+        setCookie('userPhotoURL', user.photoURL, 7);
+
+        // Redirect or update UI to reflect login success
+        window.location.href = "index.html"; // Or update the profile section directly
+      } catch (error) {
+        console.error("Error during Google login:", error.message);
+      }
+    });
+
+    // Check if the user is already logged in from cookies/localStorage
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, update the UI
+        document.getElementById("user-name").textContent = getCookie('userName') || user.displayName;
+        document.getElementById("profile-pic").src = getCookie('userPhotoURL') || user.photoURL;
+      }
+    });
+  </script>
+</head>
+<body>
+  <img id="login-button" src="button.jpg" alt="Login with Google" onclick="loginButton.click()">
+
+  <!-- Cookie Handling Functions -->
+  <script type="module">
+    // Function to set cookies
+    export function setCookie(name, value, days) {
+      const d = new Date();
+      d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));  // Set cookie expiration
+      const expires = "expires=" + d.toUTCString();
+      document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    }
+
+    // Function to get cookie by name
+    export function getCookie(name) {
+      const nameEQ = name + "=";
+      const ca = document.cookie.split(';');
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i].trim();
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+      }
+      return "";
+    }
+  </script>
+</body>
+</html>
