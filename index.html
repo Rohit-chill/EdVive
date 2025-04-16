@@ -1,73 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>Login</title>
-
+  <meta name="google-signin-client_id" content="959824270024-970f4gahb1371se8tit2du0qrbteslk4.apps.googleusercontent.com">
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
   <style>
     body {
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      margin: 0;
-      background-color: #f7f7f7;
+      background: #f5f5f5;
+      flex-direction: column;
     }
-    #login-button {
+    #loginBtn {
       cursor: pointer;
-      width: 300px;
-      height: 150px;
     }
   </style>
-
-  <!-- Firebase CDN SDK -->
-  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
-
-  <script>
-    // Firebase configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyBAYNwBjPktmf4yfLmZEsXavHgaYn-P1_g",
-      authDomain: "cadet-bee.firebaseapp.com",
-      projectId: "cadet-bee",
-      storageBucket: "cadet-bee.firebasestorage.app",
-      messagingSenderId: "929411572434",
-      appId: "1:929411572434:web:414cfc7b27bdcf467b030b",
-      measurementId: "G-EXWVCN5R16"
-    };
-
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const provider = new firebase.auth.GoogleAuthProvider();
-
-    window.onload = function () {
-      const loginButton = document.getElementById("login-button");
-
-      loginButton.addEventListener("click", () => {
-        auth.signInWithPopup(provider)
-          .then((result) => {
-            const user = result.user;
-            localStorage.setItem("userName", user.displayName);
-            localStorage.setItem("userEmail", user.email);
-            localStorage.setItem("userPhotoURL", user.photoURL);
-            window.location.href = "homepage.html";
-          })
-          .catch((error) => {
-            console.error("Error during Google login:", error.message);
-          });
-      });
-
-      auth.onAuthStateChanged((user) => {
-        if (user) {
-          window.location.href = "homepage.html";
-        }
-      });
-    };
-  </script>
 </head>
 <body>
-  <img id="login-button" src="button.jpg" alt="Login with Google">
+
+  <img id="loginBtn" src="button.png" alt="Login with Google" width="200">
+
+  <script>
+    const client = google.accounts.oauth2.initTokenClient({
+      client_id: '959824270024-970f4gahb1371se8tit2du0qrbteslk4.apps.googleusercontent.com',
+      scope: 'https://www.googleapis.com/auth/userinfo.profile',
+      callback: (tokenResponse) => {
+        if (tokenResponse && tokenResponse.access_token) {
+          // এখানে লগইন সফল হলে redirect হবে
+          window.location.href = "homepage.html";
+        }
+      },
+    });
+
+    document.getElementById("loginBtn").addEventListener("click", () => {
+      client.requestAccessToken();
+    });
+  </script>
+  
 </body>
 </html>
