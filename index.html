@@ -1,10 +1,10 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Login</title>
-  
+
   <style>
     body {
       display: flex;
@@ -21,11 +21,12 @@
     }
   </style>
 
-  <!-- Firebase Configuration and SDK Initialization -->
-  <script type="module">
-    import { initializeApp } from "firebase/app";
-    import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "firebase/auth";
+  <!-- Firebase CDN SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
 
+  <script>
+    // Firebase configuration
     const firebaseConfig = {
       apiKey: "AIzaSyBAYNwBjPktmf4yfLmZEsXavHgaYn-P1_g",
       authDomain: "cadet-bee.firebaseapp.com",
@@ -36,39 +37,37 @@
       measurementId: "G-EXWVCN5R16"
     };
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const provider = new firebase.auth.GoogleAuthProvider();
 
-    const loginButton = document.getElementById("login-button");
+    window.onload = function () {
+      const loginButton = document.getElementById("login-button");
 
-    loginButton.addEventListener('click', async () => {
-      const provider = new GoogleAuthProvider();
-      try {
-        const result = await signInWithPopup(auth, provider);
-        const user = result.user;
+      loginButton.addEventListener("click", () => {
+        auth.signInWithPopup(provider)
+          .then((result) => {
+            const user = result.user;
+            localStorage.setItem("userName", user.displayName);
+            localStorage.setItem("userEmail", user.email);
+            localStorage.setItem("userPhotoURL", user.photoURL);
+            window.location.href = "homepage.html";
+          })
+          .catch((error) => {
+            console.error("Error during Google login:", error.message);
+          });
+      });
 
-        // Save user info to localStorage
-        localStorage.setItem("userName", user.displayName);
-        localStorage.setItem("userEmail", user.email);
-        localStorage.setItem("userPhotoURL", user.photoURL);
-
-        // Redirect to the homepage.html after login
-        window.location.href = "homepage.html";
-      } catch (error) {
-        console.error("Error during Google login:", error.message);
-      }
-    });
-
-    // Check if the user is already logged in from localStorage
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // User is signed in, update the UI or redirect
-        window.location.href = "homepage.html";
-      }
-    });
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          window.location.href = "homepage.html";
+        }
+      });
+    };
   </script>
 </head>
 <body>
-  <img id="login-button" src="button.jpg" alt="Login with Google" onclick="loginButton.click()">
+  <img id="login-button" src="button.jpg" alt="Login with Google">
 </body>
 </html>
