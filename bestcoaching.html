@@ -1,0 +1,305 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ক্যাডেট কোচিং এর গুরুত্ব</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+    body {
+      margin: 0;
+      background-color: #ffffff;
+      font-family: 'Hind Siliguri', Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    #loader-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100%;
+      background: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 9999;
+    }
+
+    .progress-bar {
+      width: 300px;
+      height: 30px;
+      background: #ddd;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background-color: #4CAF50;
+      transition: width 0.2s ease;
+    }
+
+    .progress-text {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+    }
+
+    #main-content {
+      display: none;
+    }
+
+    .navbar {
+      background-color: #f0f0f0;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+    }
+
+    .back-button {
+      font-size: 13px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: #000;
+      font-weight: bold;
+    }
+
+    .logo-text {
+      font-family: 'family=Hind+Siliguri:wght@400;600', Pacifio;
+      font-size: 28px;
+      color: #333;
+    }
+
+    .profile-icon {
+      font-size: 20px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    .section-title {
+      font-size: 24px;
+      font-weight: bold;
+      border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .image-slot {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .image-slot img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .article-text {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .foldable {
+      margin-bottom: 15px;
+    }
+
+    .fold-header {
+      font-weight: bold;
+      background-color: #f2f2f2;
+      border-radius: 5px;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .fold-toggle {
+      font-size: 18px;
+    }
+
+    .fold-content {
+      display: none;
+      padding: 10px;
+      background-color: #fafafa;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-top: 5px;
+    }
+
+    .footer {
+      font-size: 14px;
+      color: #444;
+      margin-top: 30px;
+      padding: 10px;
+      border-top: 1px solid #ddd;
+    }
+  
+  .coaching-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #999;
+  text-align: center;
+  font-size: 13px;
+}
+.coaching-table th, .coaching-table td {
+  border: 1px solid #999;
+  padding: 4px;
+}
+.coaching-table thead {
+  background-color: #f2f2f2;
+}
+  </style>
+</head>
+<body>
+
+<div id="loader-container">
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill"></div>
+    <div class="progress-text" id="progressText">0%</div>
+  </div>
+</div>
+
+<div id="main-content">
+  <div class="navbar">
+    <a href="index.html" class="back-button">❌</a>
+    <div class="logo-text">ক্যাডেট বী</div>
+    <div class="profile-icon">🐝</div>
+  </div>
+
+  <div class="container">
+    <div class="section-title">ক্যাডেট কোচিং এর গুরুত্ব</div>
+
+    <div class="image-slot">
+      <img src="bestcoaching.jpg">
+    </div>
+
+    <div class="article-text">
+      ক্যাডেট কোচিং শুধু ক্যাডেট কলেজে ভর্তির লক্ষ্যেই করতে হবে--এমন ধারণা একদম সঠিক নয়। বরং, যেকোনো শিক্ষার্থীর জন্য এক বছর ক্যাডেট কোচিং করা একটি মূল্যবান অভিজ্ঞতা হতে পারে। এর মাধ্যমে একজন শিক্ষার্থী পড়াশোনার প্রতি জ্ঞান, দৃষ্টিভঙ্গি, শৃঙ্খলা, ও আত্মনির্ভরতার ক্ষেত্রে সাধারণ শিক্ষার্থীদের তুলনায় একধাপ এগিয়ে থাকার সুযোগ পায়। <br><br>
+      আর যদি কারও লক্ষ্য হয় ক্যাডেট কলেজে ভর্তি হওয়া, তাহলে ষষ্ঠ শ্রেণীতে ক্যাডেট কোচিং করা কার্যত অনিবার্য। সেটা অনলাইন হোক বা অফলাইন--উপযুক্ত প্রস্তুতির জন্য কোচিং-ই হতে পারে সবচেয়ে কার্যকর সহায়ক। নিচে এ বিষয়ে বিস্তারিত আলোচনা করা হলো:
+    </div>
+
+    <div class="foldable">
+      <div class="fold-header" onclick="toggleFold(this)">
+        <span>1. সবচেয়ে সেরা কোচিং সেন্টার কোনটি ?</span>
+        <span class="fold-toggle">+</span>
+      </div>
+      <div class="fold-content">
+       আমরা অনেক সময় কোচিং সেন্টারকে "সেরা" বলি তাদের বিজ্ঞাপনের বৈচিত্র্য, ছাত্রসংখ্যা বা জনপ্রিয়তার ওপর ভিত্তি করে। যদিও বিভিন্ন কোচিং সেন্টারের পাঠদানে কিছুটা পার্থক্য থাকতে পারে, তবুও এর মানে এই নয় যে, শুধু বিখ্যাত কোচিং সেন্টারেই পড়লেই সাফল্য আসবে। <br><br>
+       বাস্তবতা হলো--কোন কোচিংয়ে পড়ছে তা যতটা না গুরুত্বপূর্ণ, তার চেয়ে অনেক বেশি জরুরি একজন শিক্ষার্থীর নিজের আগ্রহ, চেষ্টা ও নিয়মিত পরিশ্রম। কারণ শেষ পর্যন্ত সফলতা নির্ভর করে ব্যক্তিগত প্রস্তুতির ওপর, কোনো নামকরা প্রতিষ্ঠানের ওপর নয়। <br><br>
+       তাই, যদি বাসার আশেপাশে একটি ভালো ও জনপ্রিয় কোচিং সেন্টার থাকে, সেখানে ভর্তি হওয়া যেতে পারে। আর যদি তা সম্ভব না হয়, তাহলে যেকোনো ভালো পরিবেশ ও গাইডলাইনের কোচিং-এ পড়লেও যথেষ্ট।
+
+      </div>
+    </div>
+    
+  <div class="foldable">
+  <div class="fold-header" onclick="toggleFold(this)">
+    <span>2. কয়েকটি জনপ্রিয় অফলাইন কোচিং সেন্টার :</span>
+    <span class="fold-toggle">+</span>
+  </div>
+  <div class="fold-content">
+    <table class="coaching-table">
+      <thead>
+        <tr><th>ক্রম</th><th>কোচিং এর নাম</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>01</td><td>শাহীন ক্যাডেট কোচিং</td></tr>
+        <tr><td>02</td><td>মিরপুর ক্যাডেট কোচিং</td></tr>
+        <tr><td>03</td><td>শহীদ ক্যাডেট কোচিং/একাডেমী</td></tr>
+        <tr><td>04</td><td>রংপুর ক্যাডেট কোচিং</td></tr>
+        <tr><td>05</td><td>ক্যাডেট কেয়ার কোচিং/একাডেমী</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+    <div class="foldable">
+  <div class="fold-header" onclick="toggleFold(this)">
+    <span>3. কয়েকটি জনপ্রিয় অনলাইন কোচিং সেন্টার :</span>
+    <span class="fold-toggle">+</span>
+  </div>
+  <div class="fold-content">
+    <table class="coaching-table">
+      <thead>
+        <tr><th>ক্রম</th><th>কোচিং এর নাম</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>01</td><td>মজারু</td></tr>
+        <tr><td>02</td><td>QEC Academy</td></tr>
+        <tr><td>03</td><td>ক্যাডেট কেয়ার </td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+    
+    
+    <div class="footer">
+      ✍️ লিখেছেন : ক্যাডেট রহিত (SCC, C no. 2619)<br>
+      ⏫ সর্বশেষ সম্পাদনা : 19 এপ্রিল, 2025 <br><br>
+      📢 Announcement : বিজ্ঞাপন/sponsorship এর জন্য যোগাযোগ করুন → <a href="mailto:rohitsorker8@gmail.com">Contact Now</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  let progress = 0;
+  const fill = document.getElementById('progressFill');
+  const text = document.getElementById('progressText');
+  const loader = document.getElementById('loader-container');
+  const content = document.getElementById('main-content');
+
+  const loading = setInterval(() => {
+    if (progress >= 100) {
+      clearInterval(loading);
+      loader.style.display = 'none';
+      content.style.display = 'block';
+    } else {
+      progress++;
+      fill.style.width = progress + '%';
+      text.textContent = progress + '%';
+    }
+  }, 30);
+
+  function toggleFold(element) {
+    const content = element.nextElementSibling;
+    const toggle = element.querySelector('.fold-toggle');
+    const isOpen = content.style.display === 'block';
+    content.style.display = isOpen ? 'none' : 'block';
+    toggle.textContent = isOpen ? '+' : '−';
+  }
+</script>
+
+</body>
+</html>
