@@ -114,15 +114,17 @@
 
   function startQuiz() {
     if (!quizData) {
-      showPopup("আজকের তারিখের কোন কুইজ পাওয়া যায়নি।");
-      return;
-      document.getElementById("welcomeBox").style.display = "none";
+        showPopup("আজকের তারিখের কোন কুইজ পাওয়া যায়নি।");
+        return;
     }
 
     if (localStorage.getItem("quiz_done_" + today)) {
-      showPopup("আপনি আজকের কুইজ ইতিমধ্যে ফেলেছেন। আগামীকাল নতুন কুইজ যুক্ত করা হবে।");
-      return;
+        showPopup("আপনি আজকের কুইজ ইতিমধ্যে ফেলেছেন। আগামীকাল নতুন কুইজ যুক্ত করা হবে।");
+        return;
     }
+
+    // Welcome Box লুকিয়ে ফেলার জন্য সঠিক লাইনটি যোগ করা হয়েছে
+    document.querySelector(".welcome-box").style.display = "none";
 
     document.querySelector(".play-button").style.display = "none";
     document.getElementById("quizContainer").style.display = "block";
