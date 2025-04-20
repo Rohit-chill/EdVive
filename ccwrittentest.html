@@ -73,9 +73,9 @@
     }
 
     .back-button {
-      font-size: 20px;
-      width: 36px;
-      height: 36px;
+      font-size: 13px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
       background-color: #e0e0e0;
       display: flex;
@@ -93,6 +93,21 @@
     }
 
     .profile-icon {
+      font-size: 20px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+    }
+  
+  .logo {position: absolute; left: 50%;transform: translateX(-50%);}
+.logo img {height: 90px; width : auto; /* চাইলে পরিবর্তন করতে পারো */}
+
+    .share-icon {
       font-size: 20px;
       width: 36px;
       height: 36px;
@@ -180,9 +195,9 @@
 
 <div id="main-content">
   <div class="navbar">
-    <a href="index.html" class="back-button">×</a>
-    <div class="logo-text">Cadet Bee</div>
-    <div class="profile-icon">🐝</div>
+    <a href="index.html" class="back-button">❌</a>
+<div class= "logo" > <img src = "cap.png"> </div>
+      <div class="share-icon"><img id="shareIcon" src="icon.png"></div>
   </div>
 
   <div class="container">
@@ -255,8 +270,7 @@
     <div class="footer">
       ✍️ লিখেছেন : ক্যাডেট রহিত (SCC, C no. 2619)<br>
       ⏫ সর্বশেষ সম্পাদনা : ১৪ এপ্রিল, ২০২৫ <br><br>
-      📢 Announcement : এই ওয়েবসাইট তৈরির কাজ এখনও শেষ হয়নি। তোমার অভিযোগ/মতামত/অনুরোধ জানাতে আমাদের সাথে যোগাযোগ করো।
-    </div>
+          </div>
   </div>
 </div>
 
@@ -287,6 +301,23 @@
     toggle.textContent = isOpen ? '+' : '−';
   }
 </script>
-
+<script>
+  document.getElementById('shareIcon').style.cursor = 'pointer';
+  document.getElementById('shareIcon').addEventListener('click', async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: document.title,
+          text: 'সিলেট ক্যাডেট কলেজ তথা সারা বাংলাদেশের গর্ব কে এই আশিক চৌধুরী ? বিস্তারিত জানতে এই ওয়েব পেজটি ভিজিট করো। সম্পাদনায় → (Cadet Bee)',
+          url: window.location.href
+        });
+      } catch (error) {
+        console.log('শেয়ার বাতিল হয়েছে বা ব্যর্থ হয়েছে:', error);
+      }
+    } else {
+      alert('আপনার ব্রাউজার এই শেয়ার ফিচারটি সাপোর্ট করে না।');
+    }
+  });
+</script>
 </body>
-</html>
+  </html>
