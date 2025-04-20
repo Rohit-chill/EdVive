@@ -1,0 +1,180 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Daily Quiz</title>
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+ body {margin: 0;background-color: #ffffff;text-align: center;font-family: 'Hind Siliguri', Arial, sans-serif; }
+
+  .navbar {background-color: #f0f0f0; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 3000; }
+  
+.logo {position: absolute; left: 50%;transform: translateX(-50%);}
+.logo img {height: 90px; width : auto; /* চাইলে পরিবর্তন করতে পারো */}
+
+     .play-button { margin-top: 100px; }
+  .play-button {margin-top: 100px;display: flex;justify-content: center;align-items: center;height: calc(100vh - 100px); /* navbar বাদে বাকি স্ক্রিন */}
+    .play-button img { width: 120px; cursor: pointer; }
+    .quiz-container, .result, .popup { display: none; margin-top: 50px; }
+    .question-box, .option { margin: 10px auto; padding: 10px; width: 80%; border: 2px solid #aaa; border-radius: 10px; }
+    .option { cursor: pointer; background: #fff; }
+    .option.selected { background-color: #fff9c4; }
+    .timer-bar { width: 300px; height: 30px; margin: 20px auto; border: 2px solid #000; border-radius: 20px; overflow: hidden; }
+    .timer-fill { height: 100%; width: 100%; background-color: green; transition: width 1s linear; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; font-size: 18px; }
+    .circle-percent { width: 150px; height: 150px; border-radius: 50%; border: 8px solid #4caf50; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: bold; margin: auto auto 30px auto; }
+    .buttons { margin-top: 20px; }
+    .buttons button { padding: 10px 20px; margin: 0 10px; font-weight: bold; }
+    .summary-table { margin: 0 auto; text-align: left; display: inline-block; }
+    .summary-table td { padding: 5px 15px; }
+    .popup { background: #fff; border: 2px solid #f44336; padding: 20px; width: 300px; margin: 100px auto; border-radius: 10px; }
+    .popup h3 { color: #f44336; }
+    .popup button { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="play-button">
+    <img src="play.png" alt="Play Quiz" onclick="startQuiz()" />
+  </div>
+
+  <div class="quiz-container" id="quizContainer">
+    <div class="question-number" id="questionNumber"></div>
+    <div class="timer-bar"><div class="timer-fill" id="timerFill">10</div></div>
+    <div class="question-box" id="questionBox"></div>
+    <div id="optionsContainer"></div>
+    <div class="buttons">
+      <button onclick="submitAnswer()">Submit</button>
+      <button onclick="skipQuestion()">Skip</button>
+    </div>
+  </div>
+
+  <div class="result" id="resultBox">
+    <div class="circle-percent" id="percentageBox"></div>
+    <table class="summary-table">
+      <tr><td>মোট সঠিক উত্তর</td><td id="correctCount"></td></tr>
+      <tr><td>মোট ভুল উত্তর</td><td id="wrongCount"></td></tr>
+      <tr><td>মোট স্কিপ হয়েছে</td><td id="skipCount"></td></tr>
+    </table>
+  </div>
+
+  <!-- Popup -->
+  <!-- ন্যাভবার -->
+  <div class="navbar">
+       <div class= "logo" > <img src = "cap.png"> </div>
+      </div>
+  
+  <div class="popup" id="popupBox">
+    <h3 id="popupMessage"></h3>
+    <button onclick="location.href='index.html'">Back</button>
+  </div>
+
+<script>
+  const today = new Date().toISOString().split('T')[0];
+  const quizDatabase = {
+    "2025-04-20": [
+      { question: "বাংলাদেশের রাজধানী কোথায়?", options: ["চট্টগ্রাম", "ঢাকা", "রাজশাহী", "সিলেট"], answer: 1 },
+      { question: "স্বাধীনতা দিবস কবে?", options: ["২৬ মার্চ", "১৬ ডিসেম্বর", "২১ ফেব্রুয়ারি", "১ জানুয়ারি"], answer: 0 },
+      { question: "জাতীয় ফুল কী?", options: ["লিলি", "গোলাপ", "শাপলা", "সূর্যমুখী"], answer: 2 },
+      { question: "বঙ্গোপসাগর কোথায়?", options: ["পশ্চিমে", "উত্তরে", "দক্ষিণে", "পূর্বে"], answer: 2 },
+      { question: "জাতীয় সংগীত কে লিখেছেন?", options: ["নজরুল", "রবীন্দ্রনাথ", "লালন", "জসিম"], answer: 1 }
+    ]
+    // অন্য দিনের কুইজ চাইলে এখানেই যোগ করো
+  };
+
+  let quizData = quizDatabase[today];
+  let currentQuestion = 0;
+  let selected = null;
+  let score = 0;
+  let skips = 0;
+  let timer = 10;
+  let interval;
+
+  function startQuiz() {
+    if (!quizData) {
+      showPopup("আজকের তারিখের কোন কুইজ পাওয়া যায়নি।");
+      return;
+    }
+
+    if (localStorage.getItem("quiz_done_" + today)) {
+      showPopup("আপনি আজকের কুইজ ইতিমধ্যে খেলে ফেলেছেন।");
+      return;
+    }
+
+    document.querySelector(".play-button").style.display = "none";
+    document.getElementById("quizContainer").style.display = "block";
+    loadQuestion();
+  }
+
+  function loadQuestion() {
+    if (currentQuestion >= quizData.length) return showResult();
+    selected = null;
+    timer = 10;
+    document.getElementById("questionNumber").textContent = `কুইজ-${currentQuestion + 1}`;
+    document.getElementById("questionBox").textContent = quizData[currentQuestion].question;
+    document.getElementById("optionsContainer").innerHTML = "";
+    quizData[currentQuestion].options.forEach((opt, idx) => {
+      const div = document.createElement("div");
+      div.className = "option";
+      div.textContent = opt;
+      div.onclick = () => {
+        document.querySelectorAll(".option").forEach(o => o.classList.remove("selected"));
+        div.classList.add("selected");
+        selected = idx;
+      };
+      document.getElementById("optionsContainer").appendChild(div);
+    });
+    updateTimerBar();
+    interval = setInterval(() => {
+      timer--;
+      updateTimerBar();
+      if (timer <= 0) {
+        clearInterval(interval);
+        skipQuestion();
+      }
+    }, 1000);
+  }
+
+  function updateTimerBar() {
+    const fill = document.getElementById("timerFill");
+    fill.textContent = timer;
+    fill.style.width = `${timer * 10}%`;
+    if (timer > 6) fill.style.backgroundColor = "green";
+    else if (timer > 3) fill.style.backgroundColor = "orange";
+    else fill.style.backgroundColor = "red";
+  }
+
+  function submitAnswer() {
+    clearInterval(interval);
+    if (selected === quizData[currentQuestion].answer) score++;
+    currentQuestion++;
+    loadQuestion();
+  }
+
+  function skipQuestion() {
+    clearInterval(interval);
+    skips++;
+    currentQuestion++;
+    loadQuestion();
+  }
+
+  function showResult() {
+    document.getElementById("quizContainer").style.display = "none";
+    document.getElementById("resultBox").style.display = "block";
+    const percent = (score / quizData.length) * 100;
+    document.getElementById("percentageBox").textContent = `${percent}%`;
+    document.getElementById("correctCount").textContent = `${score} টি`;
+    document.getElementById("wrongCount").textContent = `${quizData.length - score - skips} টি`;
+    document.getElementById("skipCount").textContent = `${skips} টি`;
+
+    localStorage.setItem("quiz_done_" + today, true);
+  }
+
+  function showPopup(msg) {
+    document.querySelector(".play-button").style.display = "none";
+    document.getElementById("popupBox").style.display = "block";
+    document.getElementById("popupMessage").textContent = msg;
+  }
+</script>
+</body>
+</html>
