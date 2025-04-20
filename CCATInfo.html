@@ -85,14 +85,11 @@
       color: #000;
       font-weight: bold;
     }
+  
+  .logo {position: absolute; left: 50%;transform: translateX(-50%);}
+.logo img {height: 90px; width : auto; /* চাইলে পরিবর্তন করতে পারো */}
 
-    .logo-text {
-      font-family: 'Pacifico', cursive;
-      font-size: 28px;
-      color: #333;
-    }
-
-    .profile-icon {
+    .share-icon {
       font-size: 20px;
       width: 36px;
       height: 36px;
@@ -181,8 +178,8 @@
 <div id="main-content">
   <div class="navbar">
     <a href="index.html" class="back-button">×</a>
-    <div class="logo-text">Cadet Bee</div>
-    <div class="profile-icon">🐝</div>
+        <div class= "logo" > <img src = "cap.png"> </div>
+    <div class="share-icon"><img id="shareIcon" src="icon.png"></div>
   </div>
 
   <div class="container">
@@ -268,9 +265,8 @@
     </div>
     <div class="footer">
       ✍️ লিখেছেন : ক্যাডেট রহিত (SCC, C no. 2619)<br>
-      ⏫ সর্বশেষ সম্পাদনা : 18 এপ্রিল, 2025 <br><br>
-      📢 Announcement : এই ওয়েবসাইট তৈরির কাজ এখনও শেষ হয়নি। তোমার অভিযোগ/মতামত/অনুরোধ জানাতে আমাদের সাথে যোগাযোগ করো।
-    </div>
+      ⏫ সর্বশেষ সম্পাদনা : 20 এপ্রিল, 2025 <br><br>
+          </div>
   </div>
 </div>
 
@@ -301,6 +297,24 @@
     toggle.textContent = isOpen ? '+' : '−';
   }
 </script>
+  <script>
+  document.getElementById('shareIcon').style.cursor = 'pointer';
+  document.getElementById('shareIcon').addEventListener('click', async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: document.title,
+          text: 'এই ওয়েবপেজটি দেখো!',
+          url: window.location.href
+        });
+      } catch (error) {
+        console.log('শেয়ার বাতিল হয়েছে বা ব্যর্থ হয়েছে:', error);
+      }
+    } else {
+      alert('আপনার ব্রাউজার এই শেয়ার ফিচারটি সাপোর্ট করে না।');
+    }
+  });
+</script>
 
 </body>
-</html>
+  </html>
