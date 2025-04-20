@@ -57,9 +57,9 @@
 </button>
 </div>
 
-  <button onclick="window.location.href style="display: block; margin: 15px auto 0 auto; padding: 10px 20px; width: 165px; font-family: 'Nunito', sans-serif; font-weight: 600; background-color: #f0f0f0; border: 1px solid #ccc; border-radius: 8px; cursor: pointer;">
+  <button onclick="shareWebsite()" style="display: block; margin: 15px auto 0 auto; padding: 10px 20px; width: 165px; font-family: 'Nunito', sans-serif; font-weight: 600; background-color: #f0f0f0; border: 1px solid #ccc; border-radius: 8px; cursor: pointer;">
   Share 
-</button>
+  </button>
 </div>
 
 <!-- Privacy Policy Popup -->
@@ -186,6 +186,20 @@ const matches = data.filter(item =>
       });
     }
       </script> 
-
+<script>
+  function shareWebsite() {
+    if (navigator.share) {
+      navigator.share({
+        title: document.title,
+        text: 'Check out this website!',
+        url: window.location.href
+      })
+      .then(() => console.log('Website shared successfully'))
+      .catch((error) => console.error('Error sharing:', error));
+    } else {
+      alert('Sharing not supported on this browser.');
+    }
+  }
+</script>
 </body>
 </html>
