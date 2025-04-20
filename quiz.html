@@ -1,4 +1,4 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="bn">
 <head>
   <meta charset="UTF-8" />
@@ -7,17 +7,16 @@
   <style>
   @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
- body {margin: 0;background-color: #ffffff;text-align: center;font-family: 'Hind Siliguri', Arial, sans-serif; }
-
-  .navbar {background-color: #f0f0f0; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 3000; }
+  .navbar {background-color: #f0f0f0; padding: 18px 36px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 3000; }
   
+  body {margin: 0;background-color: #ffffff;text-align: center;font-family: 'Hind Siliguri', Arial, sans-serif; }
+
 .logo {position: absolute; left: 50%;transform: translateX(-50%);}
 .logo img {height: 90px; width : auto; /* চাইলে পরিবর্তন করতে পারো */}
 
-     .play-button { margin-top: 100px; }
-  .play-button {margin-top: 100px;display: flex;justify-content: center;align-items: center;height: calc(100vh - 100px); /* navbar বাদে বাকি স্ক্রিন */}
+  .play-button {margin-top: 40px;display: flex;justify-content: center;align-items: center;height: calc(100vh - 100px); /* navbar বাদে বাকি স্ক্রিন */}
     .play-button img { width: 120px; cursor: pointer; }
-    .quiz-container, .result, .popup { display: none; margin-top: 50px; }
+    .quiz-container, .result, .popup { display: none; top: 100px; left: 50%; }
     .question-box, .option { margin: 10px auto; padding: 10px; width: 80%; border: 2px solid #aaa; border-radius: 10px; }
     .option { cursor: pointer; background: #fff; }
     .option.selected { background-color: #fff9c4; }
@@ -34,6 +33,10 @@
   </style>
 </head>
 <body>
+  <!-- ন্যাভবার -->
+  <div class="navbar">
+       <div class= "logo" > <img src = "cap.png"> </div>
+      </div>
   <div class="play-button">
     <img src="play.png" alt="Play Quiz" onclick="startQuiz()" />
   </div>
@@ -59,15 +62,13 @@
   </div>
 
   <!-- Popup -->
-  <!-- ন্যাভবার -->
-  <div class="navbar">
-       <div class= "logo" > <img src = "cap.png"> </div>
-      </div>
+  <!-- Popup -->
+<div class="popup" id="popupBox">
+  <h3 id="popupMessage"></h3>
+  <button onclick="location.href='index.html'">Back</button>
+  <button onclick="playAgain()">Play Again</button>
+</div>
   
-  <div class="popup" id="popupBox">
-    <h3 id="popupMessage"></h3>
-    <button onclick="location.href='index.html'">Back</button>
-  </div>
 
 <script>
   const today = new Date().toISOString().split('T')[0];
@@ -169,6 +170,11 @@
 
     localStorage.setItem("quiz_done_" + today, true);
   }
+  
+  function playAgain() {
+  localStorage.removeItem("quiz_done_" + today);  // আজকের কুইজের তথ্য মুছে ফেলবে
+  location.reload();  // পেজ রিলোড করে নতুন কুইজ শুরু করবে
+}
 
   function showPopup(msg) {
     document.querySelector(".play-button").style.display = "none";
@@ -177,4 +183,4 @@
   }
 </script>
 </body>
-</html>
+    </html>
