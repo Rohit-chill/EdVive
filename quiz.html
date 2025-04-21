@@ -8,14 +8,11 @@
   @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
   .navbar {background-color: #f0f0f0; padding: 26px 52px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 3000; }
-  
   body {margin: 0;background-color: #ffffff;text-align: center;font-family: 'Hind Siliguri', Arial, sans-serif; }
-
 .logo {position: absolute; left: 50%;transform: translateX(-50%);}
 .logo img {height: 90px; width : auto; /* চাইলে পরিবর্তন করতে পারো */}
-
-  .play-button {margin-top: 40px;display: flex;justify-content: center;align-items: center;height: calc(100vh - 100px); /* navbar বাদে বাকি স্ক্রিন */}
-    .play-button img { width: 120px; cursor: pointer; }
+  .play-button {display: flex;justify-content: center;align-items: flex-start; /* উপরে আনছে */padding-top: 50px; /* উপরে থেকে কতদূরে থাকবে */ height: calc(100vh - 100px); /* navbar বাদে বাকি স্ক্রিন */}
+.play-button img { width: 120px; cursor: pointer;}  
     .quiz-container, .result, .popup { display: none; top: 100px; left: 50%; }
     .question-box, .option { margin: 10px auto; padding: 10px; width: 80%; border: 2px solid #aaa; border-radius: 10px; }
     .option { cursor: pointer; background: #fff; }
@@ -43,6 +40,10 @@
   </style>
 </head>
 <body>
+  <audio id="background-music" loop>
+  <source src="music.mp3" type="audio/mp3">
+  Your browser does not support the audio element.
+</audio>
   <!-- ন্যাভবার -->
   <div class="navbar">
        <div class= "logo" > <img src = "cap.png"> </div>
@@ -112,10 +113,21 @@
   let timer = 10;
   let interval;
 
+// পেইজ লোড হলে মিউজিক চালানো
+window.addEventListener('DOMContentLoaded', () => {
+  const music = document.getElementById("bgMusic");
+  music.volume = 0.75;
+  music.play().catch(() => {
+    // যদি অটোপ্লে ব্লক হয়, কিছু না করলেও চলবে
+  });
+});
+
   function startQuiz() {
+    
     if (!quizData) {
         showPopup("আজকের তারিখের কোন কুইজ পাওয়া যায়নি।");
         return;
+  
     }
 
     if (localStorage.getItem("quiz_done_" + today)) {
@@ -129,8 +141,8 @@
     document.querySelector(".play-button").style.display = "none";
     document.getElementById("quizContainer").style.display = "block";
     loadQuestion();
-  }
-
+   }
+document.getElementById("bgMusic").pause();
   function loadQuestion() {
     if (currentQuestion >= quizData.length) return showResult();
     selected = null;
@@ -207,4 +219,4 @@
   }
 </script>
 </body>
-    </html>
+  </html>
