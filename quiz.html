@@ -17,9 +17,42 @@
     .question-box, .option { margin: 10px auto; padding: 10px; width: 80%; border: 2px solid #aaa; border-radius: 10px; }
     .option { cursor: pointer; background: #fff; }
     .option.selected { background-color: #fff9c4; }
-    .timer-bar { width: 300px; height: 30px; margin: 20px auto; border: 2px solid #000; border-radius: 20px; overflow: hidden; }
-    .timer-fill { height: 100%; width: 100%; background-color: green; transition: width 1s linear; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; font-size: 18px; }
-    .circle-percent { width: 150px; height: 150px; border-radius: 50%; border: 8px solid #4caf50; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: bold; margin: auto auto 30px auto; }
+  .timer-bar {
+  width: 300px;
+  height: 30px;
+  margin: 20px auto;
+  border: 2px solid #000;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.timer-fill {
+  height: 100%;
+  width: 100%;
+  background-color: green;
+  transition: width 1s linear;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+#timerText {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  font-weight: bold;
+  font-size: 18px;
+  z-index: 2;
+}
+        .circle-percent { width: 150px; height: 150px; border-radius: 50%; border: 8px solid #4caf50; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: bold; margin: auto auto 30px auto; }
     .buttons { margin-top: 20px; }
     .buttons button { padding: 10px 20px; margin: 0 10px; font-weight: bold; }
     .summary-table { margin: 0 auto; text-align: left; display: inline-block; }
@@ -61,7 +94,12 @@
 
   <div class="quiz-container" id="quizContainer">
     <div class="question-number" id="questionNumber"></div>
-    <div class="timer-bar"><div class="timer-fill" id="timerFill">10</div></div>
+    
+    <div class="timer-bar">
+  <div class="timer-fill" id="timerFill"></div>
+  <div class="timer-text" id="timerText">10</div>
+</div>
+    
     <div class="question-box" id="questionBox"></div>
     <div id="optionsContainer"></div>
     <div class="buttons">
@@ -173,13 +211,20 @@ document.getElementById("bgMusic").pause();
   }
 
   function updateTimerBar() {
-    const fill = document.getElementById("timerFill");
-    fill.textContent = timer;
-    fill.style.width = `${timer * 10}%`;
-    if (timer > 6) fill.style.backgroundColor = "green";
-    else if (timer > 3) fill.style.backgroundColor = "orange";
-    else fill.style.backgroundColor = "red";
-  }
+  const fill = document.getElementById("timerFill");
+  const text = document.getElementById("timerText");
+
+  // আপডেট বার প্রগ্রেস
+  fill.style.width = `${timer * 10}%`;
+
+  // আপডেট সংখ্যা
+  text.textContent = timer;
+
+  // কালার আপডেট
+  if (timer > 6) fill.style.backgroundColor = "green";
+  else if (timer > 3) fill.style.backgroundColor = "orange";
+  else fill.style.backgroundColor = "red";
+}
 
   function submitAnswer() {
     clearInterval(interval);
@@ -219,4 +264,4 @@ document.getElementById("bgMusic").pause();
   }
 </script>
 </body>
-  </html>
+    </html>
