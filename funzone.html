@@ -1,0 +1,95 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE Html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cadet Bee Fun Zone</title>
+  <!-- ............................................................................................................-->
+  
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+body {margin: 0;background-color: #ffffff;font-family: 'Hind Siliguri', Arial, sans-serif; }
+.navbar {background-color: #f0f0f0; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 3000; }
+#loader-container { position: fixed; top: 0; left: 0; height: 100vh; width: 100%; background: #ffffff; display: flex; justify-content: center; align-items: center; flex-direction: column; z-index: 9999; } 
+.progress-bar { width: 300px; height: 30px; background: #ddd; border-radius: 20px; overflow: hidden; position: relative; } 
+.progress-fill { height: 100%; width: 0%; background-color: #4CAF50; transition: width 0.2s ease; } 
+.progress-text { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; } 
+#main-content { display: none; }
+  .navbar { background-color: #f0f0f0; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); position: sticky; top: 0; } 
+.back-button { font-size: 13px; width: 32px; height: 32px; border-radius: 50%; background-color: #e0e0e0; display: flex; align-items: center; justify-content: center; text-decoration: none; color: #000; font-weight: bold; }
+  .logo {position: absolute; left: 35%;transform: translateX(-50%);}
+.logo img {height: 90px; width : auto; /* চাইলে পরিবর্তন করতে পারো */}
+.fun_zone_logo {position: absolute; left: 70%;transform: translateX(-50%);}
+.fun_zone_logo img {height: 90px; width : auto; /* চাইলে পরিবর্তন করতে পারো */}
+.card-button {display: block; text-decoration: none; border-radius: 12px; overflow: hidden; margin: 20px auto; width: 40%; max-width: 800px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.2s; }
+.card-button:hover {transform: scale(1.02);}
+.card-image {width: 50%;height: auto;display: block;}
+.card-text {padding: 12px; background-color: rgba(255 , 255 , 0, 0.3);text-align: center;font-size: 16px;color: #333;}
+.card-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; padding: 20px; }
+.card-button { text-decoration: none; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.2s; }
+.card-button:hover { transform: scale(1.02); }
+.card-image { width: 100%; height: auto; display: block; }
+.card-text { padding: 12px; background-color: rgba(255, 255, 0, 0.3); text-align: center; font-size: 16px; color: #333; }  
+  .card-wrapper { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; padding: 16px; }
+.card-button { width: 45%; text-decoration: none; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.2s; }
+.card-button:hover { transform: scale(1.02); }
+.card-image { width: 100%; height: auto; display: block; }
+.card-text { padding: 10px; background-color: rgba(255, 255, 0, 0.3); text-align: center; font-size: 15px; color: #333; }
+  </style>
+  </head>
+
+   <!-- ............................................................................................................-->
+
+<body>
+  <div id="loader-container">
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill"></div>
+    <div class="progress-text" id="progressText">0%</div>
+  </div>
+</div>
+  
+  <div id="main-content">
+  <div class="navbar">
+    <a href="index.html" class="back-button">❌</a>
+  <div class= "logo" > <img src = "cap.png"> </div>
+    <div class= "fun_zone_logo" > <img src = "funzone.png"> </div>
+    </div>
+          
+    <div class="card-wrapper">
+  <a href="quiz.html" class="card-button">
+    <img src="rumorspreader.jpg" alt="Daily Quiz" class="card-image">
+    <div class="card-text">Daily G.K Quiz</div>
+  </a>
+  <a href="####" class="card-button">
+    <img src="comingsoon.jpg" alt="#####" class="card-image">
+    <div class="card-text"> শীঘ্রই আসছে...</div>
+  </a>
+</div>
+      
+  </div>
+  
+   <!-- ............................................................................................................-->
+
+  <script>
+  
+    let progress = 0;
+  const fill = document.getElementById('progressFill');
+  const text = document.getElementById('progressText');
+  const loader = document.getElementById('loader-container');
+const content = document.getElementById('main-content');
+const loading = setInterval(() => { if (progress >= 100) { clearInterval(loading); loader.style.display = 'none'; content.style.display = 'block'; } else { progress++; fill.style.width = progress + '%'; text.textContent = progress + '%'; } }, 30);
+  
+  </script>
+  <script>
+  document.addEventListener('click', function playMusicOnce() {
+    const audio = document.getElementById('bg-music');
+    audio.play();
+    document.removeEventListener('click', playMusicOnce); // একবার চালু হলেই আর না
+  });
+</script>
+  <audio id="background-music" loop>
+  <source src="music.mp3" type="audio/mp3">
+  Your browser does not support the audio element.
+</audio>
+</body>
