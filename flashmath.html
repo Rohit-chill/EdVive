@@ -1,0 +1,226 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>Flash Math</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+  body { font-family: 'Hind Siliguri', Arial, sans-serif; text-align: center; margin: 0; padding: 0; background: #f4f4f4; }
+
+.popup, .result, #quizContainer { display: none; padding: 20px; }
+.popup.active, #quizContainer.active, .result.active { display: block; text-align: left; margin-top: 30px; }
+.timer-bar { width: 300px; height: 30px; margin: 20px auto; border: 2px solid #000; border-radius: 20px; overflow: hidden; position: relative; }
+.timer-fill { height: 100%; width: 100%; background-color: green; transition: width 1s linear; position: absolute; top: 0; left: 0; z-index: 1; }
+#timerText { position: absolute; top: 0; left: 50%; transform: translateX(-50%); height: 100%; display: flex; align-items: center; justify-content: center; color: black; font-weight: bold; font-size: 18px; z-index: 2; }
+.quiz-box, .result-box { background: #fff; padding: 20px; border-radius: 10px; max-width: 400px; margin: 20px auto; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+input[type=number] { width: 80%; padding: 10px; font-size: 18px; margin-top: 10px; }
+button { padding: 10px 20px; margin: 10px; font-size: 16px; cursor: pointer; }
+.circle-percent { width: 150px; height: 150px; border-radius: 50%; border: 8px solid #4caf50; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: bold; margin: 20px auto; }
+.summary-table { margin: 0 auto; text-align: left; display: inline-block; }
+.summary-table td { padding: 5px 15px; }
+   
+  </style>
+</head>
+<body>
+<!-- Rules Popup -->
+<div class="popup active" id="rulesPopup">
+  <div class="quiz-box" style="font-family: 'Hind Siliguri', sans-serif;">
+    <h1 style="text-align: center; font-size: 32px; font-weight: bold; text-decoration: underline; color: #333;">Flash Math</h1>
+<h3 style="text-decoration: underline;">নিয়মাবলী :</h3>
+    <p>ধারাবাহিকভাবে মোট ৫ টি সহজ ম্যাথ সলভ করতে হবে। প্রতিটি ম্যাথ সলভ করার জন্য সময় থাকবে ১০ সেকেন্ড।</p>
+
+    <h3 style="text-decoration: underline; margin-top: 20px;">উপকারিতা :</h3>
+    <ul>
+      <li>গণিতে দ্রুত চিন্তা করার ক্ষমতা বাড়ে।</li>
+      <li>প্রতিযোগিতামূলক মনোভাব তৈরি হয়।</li>
+      <li>টাইম ম্যানেজমেন্ট স্কিল উন্নত হয়।</li>
+    </ul>
+  </div>
+    
+       <button onclick="location.href='funzone.html'">Back</button>
+    <button onclick="startGame()">Play</button>
+  </div>
+</div>
+<!-- Rules Popup  2
+  
+  <div class="quiz-box" style="font-family: 'Hind Siliguri', sans-serif;">
+  <h1 style="text-align: center; font-size: 32px; font-weight: bold; text-decoration: underline; color: #333;">Flash Math</h1>
+  
+  <div style="text-align: left; margin-top: 30px;">
+    <h3 style="text-decoration: underline;">নিয়মাবলী :</h3>
+    <p>ধারাবাহিকভাবে মোট ৫ টি সহজ ম্যাথ সলভ করতে হবে। প্রতিটি ম্যাথ সলভ করার জন্য সময় থাকবে ১০ সেকেন্ড।</p>
+
+    <h3 style="text-decoration: underline; margin-top: 20px;">উপকারিতা :</h3>
+    <ul>
+      <li>গণিতে দ্রুত চিন্তা করার ক্ষমতা বাড়ে।</li>
+      <li>প্রতিযোগিতামূলক মনোভাব তৈরি হয়।</li>
+      <li>টাইম ম্যানেজমেন্ট স্কিল উন্নত হয়।</li>
+    </ul>
+  </div>
+
+  <div style="margin-top: 30px; text-align: center;">
+    <button onclick="location.href='funzone.html'" style="padding: 10px 20px; font-weight: bold;">Back</button>
+    <button onclick="startGame()" style="padding: 10px 20px; font-weight: bold;">Play</button>
+  </div>
+</div>-->
+  
+<!-- Quiz Container -->
+<div id="quizContainer">
+  <h2 id="mathCount"></h2>
+  <div class="timer-bar">
+    <div class="timer-fill" id="timerFill"></div>
+    <div class="timer-text" id="timerText">10</div>
+  </div>
+  <div class="quiz-box">
+    <div id="questionBox"></div>
+    <input type="number" id="answerInput" />
+    <div>
+      <button onclick="skipQuestion()">Skip</button>
+      <button onclick="submitAnswer()">Submit</button>
+    </div>
+    <p id="errorMessage" style="color: red; display: none;">This field is required!</p>
+  </div>
+</div>
+
+<!-- Result Page -->
+<div class="result" id="resultBox">
+  <div class="result-box">
+    <div class="circle-percent" id="percentageBox"></div>
+    <table class="summary-table">
+      <tr><td>মোট সঠিক উত্তর</td><td id="correctCount"></td></tr>
+      <tr><td>মোট ভুল উত্তর</td><td id="wrongCount"></td></tr>
+      <tr><td>মোট স্কিপ হয়েছে</td><td id="skipCount"></td></tr>
+    </table>
+    <div class="buttons">
+      <button onclick="startGame()">Play Again</button>
+      <button onclick="location.href='funzone.html'">Back</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  let quizData = [];
+  let current = 0, score = 0, skips = 0, timer = 10, interval;
+
+  function generateQuestions() {
+    const questions = [];
+    // Addition
+    let x = rand(10, 100), y = rand(10, 100);
+    questions.push({ q: `${x} + ${y}`, a: x + y });
+
+    // Subtraction
+    x = rand(50, 150), y = rand(10, 50);
+    questions.push({ q: `${x} - ${y}`, a: x - y });
+
+    // Multiplication
+    x = rand(10, 20), y = rand(1, 10);
+    questions.push({ q: `${x} × ${y}`, a: x * y });
+
+    // Division
+    y = rand(2, 12) * 2; // Ensure divisor is even
+    let a = rand(5, 10);
+    x = y * a;
+    questions.push({ q: `${x} ÷ ${y}`, a });
+
+    // Mixed
+    x = rand(10, 50), y = rand(10, 50), z = rand(10, 50);
+    questions.push({ q: `${x} + ${y} - ${z}`, a: x + y - z });
+
+    return questions;
+  }
+
+  function rand(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  function startGame() {
+    quizData = generateQuestions();
+    score = 0; skips = 0; current = 0;
+    document.getElementById("rulesPopup").classList.remove("active");
+    document.getElementById("resultBox").classList.remove("active");
+    document.getElementById("quizContainer").classList.add("active");
+    nextQuestion();
+  }
+
+  function nextQuestion() {
+    if (current >= quizData.length) return showResult();
+    document.getElementById("mathCount").textContent = `ম্যাথ-${current + 1}`;
+    document.getElementById("questionBox").textContent = quizData[current].q;
+    document.getElementById("answerInput").value = "";
+    document.getElementById("errorMessage").style.display = "none";
+    timer = 10;
+    updateTimerBar();
+    clearInterval(interval);
+    interval = setInterval(() => {
+      timer--;
+      updateTimerBar();
+      if (timer <= 0) {
+        clearInterval(interval);
+        skipQuestion();
+      }
+    }, 1000);
+  }
+
+  function updateTimerBar() {
+    const fill = document.getElementById("timerFill");
+    const text = document.getElementById("timerText");
+    fill.style.width = `${(timer / 10) * 100}%`;
+    text.textContent = timer;
+    if (timer > 6) fill.style.backgroundColor = "green";
+    else if (timer > 3) fill.style.backgroundColor = "orange";
+    else fill.style.backgroundColor = "red";
+  }
+
+  function submitAnswer() {
+    const ans = document.getElementById("answerInput").value;
+    if (ans === "") {
+      document.getElementById("errorMessage").style.display = "block";
+      return;
+    }
+    clearInterval(interval);
+    if (parseInt(ans) === quizData[current].a) {
+      score++;
+      showResultImage("correct.png");
+    } else {
+      showResultImage("wrong.png");
+    }
+    current++;
+    setTimeout(nextQuestion, 1000);
+  }
+
+  function skipQuestion() {
+    skips++;
+    clearInterval(interval);
+    current++;
+    nextQuestion();
+  }
+
+  function showResultImage(image) {
+    document.getElementById("quizContainer").classList.remove("active");
+    const img = document.createElement("img");
+    img.src = image;
+    img.style.width = "150px";
+    img.style.height = "150px";
+    img.style.margin = "100px auto";
+    img.style.display = "block";
+    document.body.appendChild(img);
+    setTimeout(() => {
+      document.body.removeChild(img);
+      document.getElementById("quizContainer").classList.add("active");
+    }, 1000);
+  }
+
+  function showResult() {
+    document.getElementById("quizContainer").classList.remove("active");
+    document.getElementById("resultBox").classList.add("active");
+    const percent = Math.round((score / quizData.length) * 100);
+    document.getElementById("percentageBox").textContent = `${percent}%`;
+    document.getElementById("correctCount").textContent = `${score} টি`;
+    document.getElementById("wrongCount").textContent = `${quizData.length - score - skips} টি`;
+    document.getElementById("skipCount").textContent = `${skips} টি`;
+  }
+</script>
+</body>
+</html>
