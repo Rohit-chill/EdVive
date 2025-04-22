@@ -30,10 +30,15 @@
 .search-results div {  padding: 6px 10px;  background-color: #f9f9f9;  border-bottom: 1px solid #ddd;  cursor: pointer;}
 .search-results div:hover { background-color: #e0f7ff;}
 .hidden-keywords { display: none;}
-.bottom-navbar { background-color: #f0f0f0; padding: 6px 12px; display: flex; justify-content: space-around; align-items: center; box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); position: fixed; bottom: 0; width: 100%; z-index: 3000; }
+.bottom-navbar { background-color: #f0f0f0; padding: 6px 12px; display: flex; justify-content: center; align-items: center; box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); position: fixed; bottom: 0; width: 100%; z-index: 3000;gap: 2px; }
 .bottom-navbar a { display: flex; align-items: center; justify-content: center; height: 48px; width: 48px; }
 .bottom-navbar img { width: 28px; height: 28px; object-fit: contain; }
-.bottom-navbar a.active { background-color: #f0f0f0; border-radius: 50%; }           
+.bottom-navbar a.active { background-color: #f0f0f0; border-radius: 50%; }    
+    .divider {
+  width: 1px;
+  height: 35px;
+  background-color: #ccc;
+            }
       </style>
     </head>
 <!--...............................................................................................................................................................................................................................................................................................................................-->     
@@ -219,6 +224,7 @@ const matches = data.filter(item =>
   <a href="index.html" class="active">
     <img src="homepageicon.png" alt="Home Icon">
   </a>
+  <div class="divider"></div>
   <a href="funzone.html">
     <img src="funzoneicon.png" alt="Fun Zone Icon">
   </a>
