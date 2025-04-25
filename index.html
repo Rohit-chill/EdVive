@@ -11,7 +11,7 @@
 .search-button {font-size: 20px;background-color: #e0e0e0;border: none;border-radius: 50%;width: 36px;height: 36px;display: flex;align-items: center;justify-content: center;cursor: pointer;}
 .logo {position: absolute; left: 50%;transform: translateX(-50%);}
 .logo img {height: 90px; width : auto; /* চাইলে পরিবর্তন করতে পারো */}
-.news-scroll-box {position: sticky;top: 60px;background-color: #333;overflow: hidden;padding: 10px 0;z-index: 1000;}
+.news-scroll-box {margin-bottom: 15px;position: sticky;top: 60px;background-color: #333;overflow: hidden;padding: 10px 0;z-index: 1000;}
 .news-scroll-text {display: inline-block;white-space: nowrap;animation: scroll-right 15s linear infinite;font-size: 15px;color: white;padding-left: 100%;}
 @keyframes scroll-right { 0% { transform: translateX(0%); } 100% { transform: translateX(-100%); }}
 .side-menu {position: fixed;top: 0;left: -100%;width: 50%;height: 100%;background-color: #f9f9f9;box-shadow: 2px 0 5px rgba(0,0,0,0.2);padding: 80px 10px 20px;z-index: 2000;transition: left 0.3s ease;}
@@ -40,11 +40,11 @@
   background-color: #ccc;
 
       .news-scroll-box {
-  margin-bottom: 15px; /* নিউজ স্ক্রলের নিচে গ্যাপ */
+   /* নিউজ স্ক্রলের নিচে গ্যাপ */
 }
 
 .promo-banner-slider {
-  margin-top: 15px; /* ব্যানারের উপরে গ্যাপ */
+   /* ব্যানারের উপরে গ্যাপ */
     }
             }
       .promo-banner-slider {
@@ -55,6 +55,7 @@
   overflow: hidden; 
   position: relative; 
   display: flex;
+        margin-top: 15px;
                               }
     .promo-banner-slider .slide { flex: 0 0 100%; transition: transform 0.6s ease-in-out; } 
 .promo-banner-slider img { width: 100%; height: 150px; display: block; object-fit: cover; border-radius: 10px; }    
