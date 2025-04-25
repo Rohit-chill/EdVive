@@ -47,34 +47,74 @@
    /* ব্যানারের উপরে গ্যাপ */
     }
             }
-      .promo-banner-slider {
-  width: 90%; /* কার্ডের মতো প্রস্থ */
-  margin: 0 auto; /* ডান এবং বাম পাশে ফাঁকা রাখবে */
-  max-width: 800px; /* কার্ডের মতো সর্বাধিক প্রস্থ */
-  height: auto; /* উচ্চতা স্বয়ংক্রিয় */
-  overflow: hidden; 
-  position: relative; 
+      .slider-container {
+  position: relative;
+  max-width: 800px;
+  margin: 20px auto;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.slides {
   display: flex;
-        margin-top: 15px;
-                              }
-    .promo-banner-slider .slide { flex: 0 0 100%; transition: transform 0.6s ease-in-out; } 
-.promo-banner-slider img { width: 100%; height: 150px; display: block; object-fit: cover; border-radius: 10px; }    
-    .divider-container {
+  transition: transform 0.5s ease-in-out;
+  width: 300%;
+}
+
+.slide {
+  flex: 1;
+}
+
+.slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.navigation {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+}
+
+.nav-button {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+.nav-button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.dots {
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin: 17px auto; /* উপরে এবং নিচে পর্যাপ্ত গ্যাপ */
-  width: 90%; /* প্রস্থ ব্যানার এবং কার্ডের সমান */
-  max-width: 800px; /* সর্বাধিক প্রস্থ */
-  height: 40px; /* ডিভাইডারের উচ্চতা */
-  border: 2px solid red; /* বক্সের বাহুগুলো লাল */
-  border-radius: 8px; /* বক্সের কোণ গুলো গোলাকার */
-  background-color: white; /* বক্সের ভিতর ফাঁকা সাদা */
-  text-align: center; /* টেক্সট মাঝখানে অ্যালাইন হবে */
-  font-size: 16px; /* টেক্সটের সাইজ */
-  font-weight: bold; /* টেক্সটের স্টাইল */
-  color: black; /* টেক্সট লাল রঙের */
-                          }
+  margin-top: 10px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  margin: 0 5px;
+  background-color: #bbb;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dot.active {
+  background-color: #333;
+  }
       </style>
     </head>
 <!--...............................................................................................................................................................................................................................................................................................................................-->     
@@ -94,11 +134,24 @@
 <div class="divider-container">News and Shortcuts ↓</div>
   
   
-       <div class="promo-banner-slider">
-  <a href="allcontent.html" class="slide"><img src="banner1.jpg" alt="Promo 1" /></a>
-  <a href="https://www.facebook.com/share/1J5fCRMQLs/" class="slide"><img src="banner2.jpg" alt="Coming Soon" /></a>
-  <a href="#all-contents" class="slide"><img src="banner3.jpg" alt="Coming Soon" /></a>
-       </div>
+       <div class="slider-container">
+  <div class="slides" id="slides">
+    <div class="slide">
+      <img src="banner1.jpg" alt="Banner 1">
+    </div>
+    <div class="slide">
+      <img src="banner2.jpg" alt="Banner 2">
+    </div>
+    <div class="slide">
+      <img src="banner3.jpg" alt="Banner 3">
+    </div>
+  </div>
+  <div class="navigation">
+    <button class="nav-button" id="prevBtn">❮</button>
+    <button class="nav-button" id="nextBtn">❯</button>
+  </div>
+</div>
+<div class="dots" id="dots"></div>
     
 </div> <!-- সাইড মেনু -->
 <div class="side-menu" id="sideMenu">
@@ -271,16 +324,52 @@ const matches = data.filter(item =>
   }
 </script>
     <script>
-  const slider = document.querySelector(".promo-banner-slider");
-  const slides = document.querySelectorAll(".promo-banner-slider .slide");
-  let currentIndex = 0;
+  const slides = document.getElementById("slides");
+const dotsContainer = document.getElementById("dots");
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+const totalSlides = document.querySelectorAll(".slide").length;
 
-  function showNextSlide() {
-    currentIndex = (currentIndex + 1) % slides.length;
-    slider.style.transform = `translateX(-${currentIndex * 100}%)`;
-  }
+let currentIndex = 0;
 
-  setInterval(showNextSlide, 5000);
+// Create dots for slider
+for (let i = 0; i < totalSlides; i++) {
+  const dot = document.createElement("div");
+  dot.classList.add("dot");
+  if (i === 0) dot.classList.add("active");
+  dot.setAttribute("data-index", i);
+  dotsContainer.appendChild(dot);
+}
+
+const updateSlider = () => {
+  slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+  document.querySelectorAll(".dot").forEach((dot, index) => {
+    dot.classList.toggle("active", index === currentIndex);
+  });
+};
+
+const goToNextSlide = () => {
+  currentIndex = (currentIndex + 1) % totalSlides;
+  updateSlider();
+};
+
+const goToPrevSlide = () => {
+  currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+  updateSlider();
+};
+
+nextBtn.addEventListener("click", goToNextSlide);
+prevBtn.addEventListener("click", goToPrevSlide);
+
+document.querySelectorAll(".dot").forEach(dot => {
+  dot.addEventListener("click", (e) => {
+    currentIndex = parseInt(e.target.getAttribute("data-index"));
+    updateSlider();
+  });
+});
+
+// Auto-slide every 5 seconds
+setInterval(goToNextSlide, 5000);
     </script>
     <!-- Bottom Navbar -->
 <div class="bottom-navbar">
