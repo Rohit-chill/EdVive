@@ -39,6 +39,12 @@
   height: 35px;
   background-color: #ccc;
             }
+     .slider-container { width: 100%; max-width: 100%; position: relative; overflow: hidden; border-radius: 10px; margin: 15px 0; } 
+  .slider-wrapper { display: flex; width: 300%; animation: slide 15s infinite; } 
+  .slide { width: 100%; flex-shrink: 0; position: relative; } 
+    .slide img { width: 100%; height: 150px; object-fit: cover; display: block; cursor: pointer; border-radius: 10px; }
+  @keyframes slide { 0% { transform: translateX(0%); } 33.33% { transform: translateX(-100%); } 66.66% { transform: translateX(-200%); } 100% { transform: translateX(0%); } } 
+                        
       </style>
     </head>
 <!--...............................................................................................................................................................................................................................................................................................................................-->     
@@ -53,6 +59,26 @@
     <div class="news-scroll-text">
       বাংলাদেশের একমাত্র ক্যাডেট কলেজ ভর্তি পরীক্ষার গাইডলাইন বিষয়ক ওয়েবসাইটে স্বাগতম। এটি সম্পূর্ণ অ্যাড ফ্রি ওয়েবসাইট। এই ওয়েবসাইটের কাজ এখনো শেষ হয়নি। তোমার অভিযোগ/মতামত/পরামর্শ পাঠিয়ে দাও cadetbeegroup@gmail.com এই ঠিকানায়।
     </div>
+
+       <div class="slider-container">
+  <div class="slider-wrapper">
+    <div class="slide">
+      <a href="allcontent.html">
+        <img src="banner1.jpg" alt="Promo 1">
+      </a>
+    </div>
+    <div class="slide">
+      <a href="https://example.com/banner2">
+        <img src="banner2.jpg" alt="Coming Soon">
+      </a>
+    </div>
+    <div class="slide">
+      <a href="https://example.com/banner3">
+        <img src="banner3.jpg" alt="Coming Soon">
+      </a>
+    </div>
+  </div>
+       </div>
     
 </div> <!-- সাইড মেনু -->
 <div class="side-menu" id="sideMenu">
