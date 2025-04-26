@@ -70,12 +70,12 @@
 
 .slides {
   display: flex;
-  transition: transform 0.5s ease-in-out;
-  width: 300%;
+  transition: transform 0.5s ease-in-out; /* স্লাইডিং অ্যানিমেশন */
+  width: 110%; /* তিনটি স্লাইডের জন্য যথেষ্ট প্রস্থ */
 }
 
 .slide {
-  flex: 1;
+  flex: 0 0 100%; /* প্রতিটি স্লাইড একে অপরের সমান প্রস্থ নিবে */
 }
 
 .slide img {
@@ -345,7 +345,7 @@ const totalSlides = document.querySelectorAll(".slide").length;
 
 let currentIndex = 0;
 
-// Create dots for slider
+// ডট তৈরি
 for (let i = 0; i < totalSlides; i++) {
   const dot = document.createElement("div");
   dot.classList.add("dot");
@@ -354,26 +354,31 @@ for (let i = 0; i < totalSlides; i++) {
   dotsContainer.appendChild(dot);
 }
 
+// স্লাইড আপডেট ফাংশন
 const updateSlider = () => {
-  slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+  slides.style.transform = `translateX(-${currentIndex * 100}%)`; // প্রতিটি স্লাইডের প্রস্থ ১০০% ধরে
   document.querySelectorAll(".dot").forEach((dot, index) => {
-    dot.classList.toggle("active", index === currentIndex);
+    dot.classList.toggle("active", index === currentIndex); // সক্রিয় ডট হাইলাইট
   });
 };
 
+// পরবর্তী স্লাইড
 const goToNextSlide = () => {
-  currentIndex = (currentIndex + 1) % totalSlides;
+  currentIndex = (currentIndex + 1) % totalSlides; // স্লাইড সংখ্যা রিপিট হবে
   updateSlider();
 };
 
+// পূর্ববর্তী স্লাইড
 const goToPrevSlide = () => {
-  currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+  currentIndex = (currentIndex - 1 + totalSlides) % totalSlides; // পূর্ববর্তী স্লাইডে যাওয়া
   updateSlider();
 };
 
+// বোতামের ইভেন্ট লিসেনার
 nextBtn.addEventListener("click", goToNextSlide);
 prevBtn.addEventListener("click", goToPrevSlide);
 
+// ডট ক্লিক ইভেন্ট
 document.querySelectorAll(".dot").forEach(dot => {
   dot.addEventListener("click", (e) => {
     currentIndex = parseInt(e.target.getAttribute("data-index"));
@@ -381,9 +386,10 @@ document.querySelectorAll(".dot").forEach(dot => {
   });
 });
 
-// Auto-slide every 5 seconds
+// ৫ সেকেন্ড পর পর স্লাইড অটো-চেঞ্জ
 setInterval(goToNextSlide, 5000);
     </script>
+    
     <!-- Bottom Navbar -->
 <div class="bottom-navbar">
   <a href="index.html" class="active">
@@ -394,5 +400,6 @@ setInterval(goToNextSlide, 5000);
     <img src="funzoneicon.png" alt="Fun Zone Icon">
   </a>
 </div>
+      
     </body>
 </html>
