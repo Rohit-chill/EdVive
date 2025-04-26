@@ -35,9 +35,21 @@
 .bottom-navbar img { width: 28px; height: 28px; object-fit: contain; }
 .bottom-navbar a.active { background-color: #f0f0f0; border-radius: 50%; }    
     .divider-container {
-  width: 1px;
-  height: 35px;
-  background-color: #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto; /* উপরে এবং নিচে পর্যাপ্ত গ্যাপ */
+  width: 90%; /* প্রস্থ ব্যানার এবং কার্ডের সমান */
+  max-width: 800px; /* সর্বাধিক প্রস্থ */
+  height: 40px; /* ডিভাইডারের উচ্চতা */
+  border: 2px solid red; /* বক্সের বাহুগুলো লাল */
+  border-radius: 8px; /* বক্সের কোণ গুলো গোলাকার */
+  background-color: white; /* বক্সের ভিতর ফাঁকা সাদা */
+  text-align: center; /* টেক্সট মাঝখানে অ্যালাইন হবে */
+  font-size: 16px; /* টেক্সটের সাইজ */
+  font-weight: bold; /* টেক্সটের স্টাইল */
+  color: red; /* টেক্সট লাল রঙের */
+    }
 
       .news-scroll-box {
    /* নিউজ স্ক্রলের নিচে গ্যাপ */
@@ -71,6 +83,7 @@
   height: auto;
   display: block;
   object-fit: cover;
+  margin: 0 auto;
 }
 
 .navigation {
