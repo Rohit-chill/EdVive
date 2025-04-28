@@ -60,6 +60,23 @@
       <a href="ashikchowdhuryhtml" class="new-card">
     সিলেট ক্যাডেট কলেজ তথা সারা বাংলাদেশের গর্ব কে এই আশিক চৌধুরী ?
           </a></div>
-  
+  <script>
+  document.getElementById('shareIcon').style.cursor = 'pointer';
+  document.getElementById('shareIcon').addEventListener('click', async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: document.title,
+          text: 'ক্যাডেট কলেজ এডমিশন গাইড ও তথ্য ',
+          url: window.location.href
+        });
+      } catch (error) {
+        console.log('⚠️ শেয়ার ব্যর্থ হয়েছে:', error);
+      }
+    } else {
+      alert('⚠️ আপনার ব্রাউজার এই শেয়ার ফিচারটি সাপোর্ট করে না।');
+    }
+  });
+  </script>
 </body>
 </html>
