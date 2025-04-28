@@ -35,6 +35,10 @@
   padding: 15px;
   text-align: center;
   transition: transform 0.3s;
+  display: block; /* পুরো কার্ডকে ব্লক হিসেবে সেট করা */
+  text-decoration: none; /* লিংকের আন্ডারলাইন সরানো */
+  color: black; /* লিংকের রঙ ঠিক রাখা */
+  
 }
 
 .new-card img {
@@ -244,25 +248,18 @@
 
 <!-- New structure for cards with 2 in a row -->
 <div class="new-cards-container">
-  <div class="new-card">
-    <a href="articles.html">
-      <img src="articles.png" alt="Admission Guide and Info">
-      <div>Admission Guide and Info</div>
-    </a>
-  </div>
-  <div class="new-card">
-    <a href="funzone.html">
-      <img src="funzone2.png" alt="Fun Zone : Quiz Challenge">
-      <div>Fun Zone : Quiz Challenge</div>
-    </a>
-  </div>
-  
-  <div class="new-card">
-    <a href="studyresources.html">
-      <img src="studyresources.png" alt="Study Resources">
-      <div>Study Resources</div>
-    </a>
-  </div>
+  <a href="articles.html" class="new-card"> <!-- পুরো কার্ডকে a ট্যাগ দিয়ে ঘিরে ফেলা -->
+    <img src="articles.png" alt="Admission Guide and Info">
+    <div>Admission Guide and Info</div>
+  </a>
+  <a href="funzone.html" class="new-card"> <!-- পুরো কার্ডকে a ট্যাগ দিয়ে ঘিরে ফেলা -->
+    <img src="funzone2.png" alt="Fun Zone : Quiz Challenge">
+    <div>Fun Zone : Quiz Challenge</div>
+  </a>
+  <a href="studyresources.html" class="new-card"> <!-- পুরো কার্ডকে a ট্যাগ দিয়ে ঘিরে ফেলা -->
+    <img src="studyresources.png" alt="Study Resources">
+    <div>Study Resources</div>
+  </a>
 </div>
     <script>
     function toggleSearch() {
