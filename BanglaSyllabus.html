@@ -1,0 +1,307 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadet Admission Bangla Syllabus</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+    body {
+      margin: 0;
+      background-color: #ffffff;
+      font-family: 'Hind Siliguri', Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    #loader-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100%;
+      background: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 9999;
+    }
+
+    .progress-bar {
+      width: 300px;
+      height: 30px;
+      background: #ddd;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background-color: #4CAF50;
+      transition: width 0.2s ease;
+    }
+
+    .progress-text {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+    }
+
+    #main-content {
+      display: none;
+    }
+
+    .navbar {
+      background-color: #f0f0f0;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+    }
+
+    .back-button {
+      font-size: 20px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: #000;
+      font-weight: bold;
+    }
+  
+  .logo {position: absolute; left: 50%;transform: translateX(-50%);}
+.logo img {height: 90px; width : auto; /* চাইলে পরিবর্তন করতে পারো */}
+
+    .share-icon {
+      font-size: 20px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    .section-title {
+      font-size: 24px;
+      font-weight: bold;
+      border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .image-slot {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .image-slot img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .article-text {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .foldable {
+      margin-bottom: 15px;
+    }
+
+    .fold-header {
+      font-weight: bold;
+      background-color: #f2f2f2;
+      border-radius: 5px;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .fold-toggle {
+      font-size: 18px;
+    }
+
+    .fold-content {
+      display: none;
+      padding: 10px;
+      background-color: #fafafa;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-top: 5px;
+    }
+
+    .footer {
+      font-size: 14px;
+      color: #444;
+      margin-top: 30px;
+      padding: 10px;
+      border-top: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+
+<div id="loader-container">
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill"></div>
+    <div class="progress-text" id="progressText">0%</div>
+  </div>
+</div>
+
+<div id="main-content">
+  <div class="navbar">
+    <a href="index.html" class="back-button">❌</a>
+        <div class= "logo" > <img src = "cap.png"> </div>
+    <div class="share-icon"><img id="shareIcon" src="icon.png"></div>
+  </div>
+
+  <div class="container">
+    <div class="section-title"> ক্যাডেট কলেজ বাংলা সিলেবাস</div>
+
+    <div class="image-slot">
+      <img src="BanglaSyllabus.jpg">
+    </div>
+
+    <div class="article-text">
+      ক্যাডেট কলেজ ভর্তি পরীক্ষায় মোট 60 নম্বরের বাংলা প্রশ্ন করা হয়ে থাকে। 60 নম্বর এর এই বাংলা পরিক্ষায় মূলত প্রশ্ন করা হয় 2 টি অংশ থেকে। 1. বাংলা 1ম পত্র এবং 2. বাংলা 2য় পত্র। নিচে এগুলো নিয়ে বিস্তারিত আলোচনা করা হলো।
+              </div>
+
+    <div class="foldable">
+      <div class="fold-header" onclick="toggleFold(this)">
+        <span>1. বাংলা 1ম পত্রের প্রিপারেশন :</span>
+        <span class="fold-toggle">+</span>
+      </div>
+      <div class="fold-content">
+        <b>কি পড়তে হবে:</b> বাংলা 1ম পত্রের প্রস্তুতি নেওয়ার জন্য পড়তে হবে 6ষ্ঠ শ্রেণীর জন্য নির্ধারিত "চারুপাঠ" বইটি। চারুপাঠ বইয়ের সকল গদ্য ও কবিতা ভালোভাবে মুখস্থ করতে হবে।<br><br>
+        <b>∆কিভাবে প্রশ্ন আসে :</b> প্রশ্নের প্যাটার্ন বোঝার জন্য সবচেয়ে ভালো উপায় হচ্ছে বিগত বছরের প্রশ্ন দেখা। তবে, সাধারণত বাংলা 1ম পত্র অংশ থেকে এসে থাকে: <br>
+• শব্দার্থ, সঠিক বানান, যুক্তবর্ণ। <br>
+• এক কথায় উত্তর/রচনামূলক প্রশ্ন। <br>
+• কবিতার পরবর্তী চরণ‌। <br>
+• লেখকদের পরিচিতি,  ছদ্মনাম ও উল্লেখযোগ্য সাহিত্য কর্ম ইত্যাদি। 
+            </div>
+    </div>
+
+    <div class="foldable">
+      <div class="fold-header" onclick="toggleFold(this)">
+        <span>2. বাংলা 2য় পত্রের প্রিপারেশন: :</span>
+        <span class="fold-toggle">+</span>
+      </div>
+      <div class="fold-content">
+        <b>কি পড়তে হবে:</b> <br>
+• ৬ষ্ঠ শ্রেণীর ব্যাকরণ বই। <br>
+• বিগত বছরের ব্যাকরণ প্রশ্ন। <br>
+• বিশ্ববিদ্যালয় ভর্তি পরিক্ষা/ BCS এ আসা বিভিন্ন প্রশ্ন (শুধুমাত্র সিলেবাসের টপিকস গুলো)। <br>
+• ৭ম/৮ম শ্রেণীর ব্যাকরণ বই (শুধুমাত্র সিলেবাসের টপিকস গুলো)। <br><br>
+
+        <b>ব্যাকরণের যে টপিকস গুলো থেকে প্রশ্ন এসে থাকে: </b><br>
+• ভাষা ও বাংলা ভাষা, ধ্বনিতত্ত্ব, রূপতত্ত্ব, বাক্যতত্ত্ব, বাগর্থ। <br>
+• শব্দ ও পদ পরিচয়ঃ শব্দ, পদ, পদের শ্রেণিবিভাগ, পদ পরিবর্তন, বিপরীত শব্দ, দ্বিরুক্ত শব্দ ও সংখ্যাবাচক শব্দ। <br>
+• লিঙ্গ। <br>
+• বচন। <br>
+• ক্রিয়ার কাল: শ্রেণিবিভাগ ও প্রয়োগ।<br>
+• কারক।<br>
+• বাগধারা।<br>
+• এক কথায় প্রকাশ।<br>
+• বিরাম চিহ্ন।<br><br>
+
+        <b>নির্মিতি অংশ হতে যে টপিকস গুলো পড়বে:</b><br>
+• ভাব-সম্প্রসারণ।<br>
+• অনুচ্ছেদ লিখন/যুক্তিভিত্তিক অনুচ্ছেদ (১০-১৫ বাক্য)।<br>
+• অনুধাবন।<br>
+• সারাংশ ও সারমর্ম।<br>
+      </div>
+    </div>
+
+    <div class="foldable">
+      <div class="fold-header" onclick="toggleFold(this)">
+        <span>3. বিগত বছরে আসা কিছু প্রশ্ন :</span>
+        <span class="fold-toggle">+</span>
+      </div>
+      <div class="fold-content">
+        Coming Soon....
+            </div>
+    </div>
+
+    
+    <div class="footer">
+      ✍️ লিখেছেন : ক্যাডেট রহিত (SCC, C no. 2619)<br>
+      ⏫ সর্বশেষ সম্পাদনা : 29 এপ্রিল, 2025 <br><br>
+          </div>
+  </div>
+</div>
+
+<script>
+  let progress = 0;
+  const fill = document.getElementById('progressFill');
+  const text = document.getElementById('progressText');
+  const loader = document.getElementById('loader-container');
+  const content = document.getElementById('main-content');
+
+  const loading = setInterval(() => {
+    if (progress >= 100) {
+      clearInterval(loading);
+      loader.style.display = 'none';
+      content.style.display = 'block';
+    } else {
+      progress++;
+      fill.style.width = progress + '%';
+      text.textContent = progress + '%';
+    }
+  }, 30);
+
+  function toggleFold(element) {
+    const content = element.nextElementSibling;
+    const toggle = element.querySelector('.fold-toggle');
+    const isOpen = content.style.display === 'block';
+    content.style.display = isOpen ? 'none' : 'block';
+    toggle.textContent = isOpen ? '+' : '−';
+  }
+</script>
+  <script>
+  document.getElementById('shareIcon').style.cursor = 'pointer';
+  document.getElementById('shareIcon').addEventListener('click', async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: document.title,
+          text: 'Cadet Admission Bangla Syllabus',
+          url: window.location.href
+        });
+      } catch (error) {
+        console.log('শেয়ার বাতিল হয়েছে বা ব্যর্থ হয়েছে:', error);
+      }
+    } else {
+      alert('আপনার ব্রাউজার এই শেয়ার ফিচারটি সাপোর্ট করে না।');
+    }
+  });
+</script>
+
+</body>
+  </html>
