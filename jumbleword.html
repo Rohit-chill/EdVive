@@ -1,0 +1,374 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1' /><!DOCTYPE html>
+<html lang="bn">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Jumble Word (English)</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+    body {
+      font-family: 'Hind Siliguri', Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+    }
+
+    .popup,
+    .result,
+    #quizContainer {
+      display: none;
+      padding: 20px;
+    }
+
+    .popup.active,
+    #quizContainer.active,
+    .result.active {
+      display: block;
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .timer-bar {
+      width: 300px;
+      height: 30px;
+      margin: 20px auto;
+      border: 2px solid #000;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .timer-fill {
+      height: 100%;
+      background-color: green;
+      transition: width 1s linear;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    #timerText {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: black;
+      font-weight: bold;
+      font-size: 16px;
+      z-index: 1;
+    }
+
+    .quiz-box,
+    .result-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 400px;
+      margin: 20px auto;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    input[type=text] {
+      width: 80%;
+      padding: 10px;
+      font-size: 18px;
+      margin-top: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .circle-percent {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 8px solid #4caf50;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      font-weight: bold;
+      margin: 20px auto;
+    }
+
+    .summary-table {
+      margin: 0 auto;
+      text-align: center;
+      display: inline-block;
+    }
+
+    .summary-table td {
+      padding: 5px 15px;
+    }
+
+    .answer-box {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 10px;
+      border-radius: 5px;
+      display: inline-block;
+    }
+
+    .answer-box.correct {
+      color: green;
+    }
+
+    .answer-box.wrong {
+      color: red;
+    }
+  
+  
+ .answer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.result-image {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 10px;
+}
+
+.answer-box {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  width: 200px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.answer-box.correct {
+  color: green;
+  background-color: #e8f5e9;
+  border: 2px solid green;
+}
+
+.answer-box.wrong {
+  color: red;
+  background-color: #ffebee;
+  border: 2px solid red;
+}
+   </style>
+</head>
+
+<body>
+  <!-- Rules Popup -->
+  <div class="popup active" id="rulesPopup">
+    <div class="quiz-box" style="font-family: 'Hind Siliguri', sans-serif;">
+      <h1 style="text-align: center; font-size: 25px; font-weight: bold; text-decoration: underline; color: #333;">Jumble
+        Word (English)</h1>
+      <h3 style="text-decoration: underline;">নিয়মাবলী :</h3>
+      <p>ধারাবাহিকভাবে 5টি ইংরেজি শব্দ আসবে, যেগুলোর বর্ণগুলো এলোমেলোভাবে সাজানো থাকবে। 15 সেকেন্ডের মধ্যে বর্ণগুলোকে সঠিকভাবে সাজিয়ে পুনরায় শব্দটি লিখতে
+        হবে। শব্দটি যদি আগে থেকেই সঠিকভাবে সাজানো থাকে তাহলে সেটি হুবহু লিখতে হবে। প্রতিটি সঠিক উত্তরের জন্য পরবর্তী কুইজে 3 সেকেন্ড সময় বোনাস পাবে। </p>
+
+      <h3 style="text-decoration: underline; margin-top: 20px;">উপকারিতা :</h3>
+      <ul>
+        
+        <li>বানান দক্ষতা (Spelling Skill) উন্নত হয়</li>
+        <li>শব্দভাণ্ডার (Vocabulary) বাড়ায়</li>
+        <li>বিশ্লেষণ ক্ষমতা (Analytical Thinking) বাড়ায়</li>
+      </ul>
+    </div>
+
+    <button onclick="location.href='funzone.html'">Back</button>
+    <button onclick="startGame()">Play</button>
+  </div>
+
+  <!-- Quiz Container -->
+  <div id="quizContainer">
+    <h2 id="wordCount"></h2>
+    <div class="timer-bar">
+      <div class="timer-fill" id="timerFill" style="width: 100%;"></div>
+      <div class="timer-text" id="timerText">15</div>
+    </div>
+    <div class="quiz-box">
+      <div id="wordBox"></div>
+      <input type="text" id="answerInput" />
+      <div>
+        <button onclick="skipQuestion()">Skip</button>
+        <button onclick="submitAnswer()">Submit</button>
+      </div>
+      <p id="errorMessage" style="color: red; display: none;">This field is required!</p>
+    </div>
+  </div>
+
+  <!-- Result Page -->
+  <div class="result" id="resultBox">
+    <div class="result-box">
+      <div class="circle-percent" id="percentageBox"></div>
+      <table class="summary-table">
+        <tr>
+          <td>মোট সঠিক উত্তর</td>
+          <td id="correctCount"></td>
+        </tr>
+        <tr>
+          <td>মোট ভুল উত্তর</td>
+          <td id="wrongCount"></td>
+        </tr>
+        <tr>
+          <td>মোট স্কিপ হয়েছে</td>
+          <td id="skipCount"></td>
+        </tr>
+      </table>
+      <div class="buttons">
+        <button onclick="startGame()">Play Again</button>
+        <button onclick="location.href='funzone.html'">Back</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  const words = [
+  "Fundamental" ,"Branch", "Doctor", "Tomorrow", "Bedroom", "Victim", "Money", "Telephone", 
+  "Aljebra", "English", "Communication", "Cowboy", "Android", "Pakistan", 
+  "Criminal", "System", "Location", "Square", "Greenland", "Crocodile", 
+  "Committee", "Sentence", "Computer", "Hockey", "Acknowledge", "Describe", 
+  "Exercise", "Perfect", "Composition", "Business", "Mangoes", 
+  "Direction", "Printer","Arabic","Profitable", "Considered"
+];
+        let quizData = [];
+    let current = 0, score = 0, skips = 0, defaultTime = 15, timer = defaultTime, maxTime = defaultTime, interval;
+
+    function shuffleWord(word) {
+      if (word.length <= 2) return word.toUpperCase();
+      const middle = word.slice(1, -1).split('').sort(() => Math.random() - 0.5).join('');
+      return `${word[0]}${middle}${word[word.length - 1]}`.toUpperCase();
+    }
+
+    function generateQuestions() {
+      let remainingWords = words.filter(word => !localStorage.getItem(word));
+      if (remainingWords.length < 5) {
+        alert("No new words available! Please reset your progress.");
+        location.href = "funzone.html";
+        return [];
+      }
+      return remainingWords.slice(0, 5).map(word => {
+        localStorage.setItem(word, true);
+        return { q: shuffleWord(word), a: word };
+      });
+    }
+
+    function startGame() {
+      quizData = generateQuestions();
+      if (quizData.length === 0) return;
+      score = 0; skips = 0; current = 0;
+      document.getElementById("rulesPopup").classList.remove("active");
+      document.getElementById("resultBox").classList.remove("active");
+      document.getElementById("quizContainer").classList.add("active");
+      timer = defaultTime;
+      maxTime = defaultTime;
+      nextQuestion();
+    }
+
+    function nextQuestion() {
+      if (current >= quizData.length) return showResult();
+      document.getElementById("wordCount").textContent = `word-${current + 1}`;
+      document.getElementById("wordBox").textContent = quizData[current].q;
+      document.getElementById("answerInput").value = "";
+      document.getElementById("errorMessage").style.display = "none";
+      timer = maxTime; // Reset timer for each question with maxTime
+      updateTimerBar();
+      clearInterval(interval);
+      interval = setInterval(() => {
+        timer--;
+        updateTimerBar();
+        if (timer <= 0) {
+          clearInterval(interval);
+          skipQuestion();
+        }
+      }, 1000);
+    }
+
+    function updateTimerBar() {
+      const fill = document.getElementById("timerFill");
+      const text = document.getElementById("timerText");
+      fill.style.width = `${(timer / maxTime) * 100}%`;
+      text.textContent = timer;
+      if (timer > maxTime * 0.6) fill.style.backgroundColor = "green";
+      else if (timer > maxTime * 0.3) fill.style.backgroundColor = "orange";
+      else fill.style.backgroundColor = "red";
+    }
+
+    function submitAnswer() {
+      const ans = document.getElementById("answerInput").value.trim();
+      if (ans === "") {
+        document.getElementById("errorMessage").style.display = "block";
+        return;
+      }
+      clearInterval(interval);
+      const isCorrect = ans.toLowerCase() === quizData[current].a.toLowerCase();
+      if (isCorrect) {
+        score++;
+        showResultImage("correct.png", true);
+        maxTime = defaultTime + 3; // Add 3 seconds bonus for correct answer
+      } else {
+        showResultImage("wrong.png", false);
+        maxTime = defaultTime; // Reset to default time for wrong answer
+      }
+      current++;
+      setTimeout(nextQuestion, isCorrect ? 2000 : 3000); // 2 seconds for correct, 3 seconds for wrong
+    }
+
+    function skipQuestion() {
+      skips++;
+      clearInterval(interval);
+      maxTime = defaultTime; // Reset to default time when skipped
+      current++;
+      nextQuestion();
+    }
+
+    function showResultImage(image, isCorrect) {
+      document.getElementById("quizContainer").classList.remove("active");
+      const img = document.createElement("img");
+      img.src = image;
+      img.style.width = "150px";
+      img.style.height = "150px";
+      img.style.margin = "20px auto";
+      img.style.display = "block";
+
+      const answerBox = document.createElement("div");
+      answerBox.className = "answer-box " + (isCorrect ? "correct" : "wrong");
+      answerBox.textContent = isCorrect ? "+ 3 Seconds" : `Correct Answer Was : ${quizData[current].a}`;
+
+     
+      
+      document.body.appendChild(img);
+      document.body.appendChild(answerBox);
+
+      setTimeout(() => {
+        document.body.removeChild(img);
+        document.body.removeChild(answerBox);
+        document.getElementById("quizContainer").classList.add("active");
+      }, isCorrect ? 2000 : 3000);
+    }
+
+    function showResult() {
+      document.getElementById("quizContainer").classList.remove("active");
+      document.getElementById("resultBox").classList.add("active");
+      const percent = Math.round((score / quizData.length) * 100);
+      document.getElementById("percentageBox").textContent = `${percent}%`;
+      document.getElementById("correctCount").textContent = `${score} টি`;
+      document.getElementById("wrongCount").textContent = `${quizData.length - score - skips} টি`;
+      document.getElementById("skipCount").textContent = `${skips} টি`;
+    }
+  </script>
+</body>
+
+</html>
