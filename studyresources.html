@@ -8,81 +8,142 @@
   <title>Study Resources</title>
   <style>
   @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
- body {margin: 0;background-color: #ffffff;font-family: 'Hind Siliguri', Arial, sans-serif; }
-  .navbar {background-color: #f0f0f0; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 3000; }
-  .logo {position: absolute; left: 50%;transform: translateX(-50%);}
-.logo img {height: 90px; width : auto; /* চাইলে পরিবর্তন করতে পারো */}
-.back-button { font-size: 15px; width: 36px; height: 36px; border-radius: 50%; background-color: #e0e0e0; display: flex; align-items: center; justify-content: center; text-decoration: none; color: #000; font-weight: bold; }
-  .share-icon { font-size: 20px; width: 36px; height: 36px; border-radius: 50%; background-color: #e0e0e0; display: flex; align-items: center; justify-content: center; user-select: none; }
-  .container { padding: 20px 20px 0px 20px; } 
-  .card-date {padding: 12px; background-color: #f5f5f5;text-align: center;font-size: 13px;color: #333;}
-  .new-cards-container { display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 10px 10px 10px 10px 5px; width: 100%; align-items: stretch; } 
-.new-card { text-decoration: none; /* লিঙ্কের নিচের দাগ সরাবে */ color: #000 ; /* লিঙ্কের রঙ নির্ধারণ করবে */background: #E8F0F8; border-radius: 10px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); padding: 15px; text-align: left; transition: transform 0.3s; width: 100%; box-sizing: border-box; font-size: 17px;} 
-.new-card img { width: 80px; height: 80px; margin-bottom: 10px; } 
-.new-card:hover { background-color: #e0e0e0; /* হোভার ইফেক্ট */}transform: scale(1.05); } 
-.new-card a { text-decoration: none; color: black; font-size: 14px; font-weight: bold; text-align: left; }
+  @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+  
+  body {margin: 0; background-color: #ffffff; font-family: 'Hind Siliguri', Arial, sans-serif;}
+  .navbar {background-color: #f0f0f0; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000;}
+  .logo {position: absolute; left: 50%; transform: translateX(-50%);}
+  .logo img {height: 90px; width: auto;}
+  .back-button {font-size: 15px; width: 36px; height: 36px; border-radius: 50%; background-color: #e0e0e0; display: flex; align-items: center; justify-content: center; text-decoration: none; color: #000;}
+  .share-icon {font-size: 20px; width: 36px; height: 36px; border-radius: 50%; background-color: #e0e0e0; display: flex; align-items: center; justify-content: center; user-select: none;}
+  
+  .container {padding: 20px;}
+  
+  /* Main Card */
+  .main-card {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    text-align: left;
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .main-card.open {
+    background-color: #e0f7e0; /* হালকা সবুজ রঙ */
+    box-shadow: 0 4px 8px rgba(0, 128, 0, 0.2);
+  }
+  .main-card:hover:not(.open) {
+    background-color: #f0f0f0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .arrow {
+    font-size: 20px;
+    transition: transform 0.3s ease;
+  }
+
+  /* Sub Cards Container */
+  .sub-cards-container {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 0;
+    border: 1px solid #ddd;
+    border-radius: 0 0 8px 8px;
+    padding: 10px;
+    background-color: #ffffff;
+    opacity: 0;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  .sub-cards-container.open {
+    display: flex;
+    opacity: 1;
+    transform: scaleY(1);
+  }
+  
+  /* Sub Cards */
+  .sub-card {
+    text-decoration: none;
+    color: #000;
+    background-color: #ffffff;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  .sub-card:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.02);
+  }
   </style>
   
 </head>
 <body>
   
-   <div class="navbar">
+  <div class="navbar">
     <a href="index.html" class="back-button">❌</a>
-        <div class= "logo" > <img src = "cap.png"> </div>
+    <div class="logo"><img src="cap.png"></div>
     <div class="share-icon"><img id="shareIcon" src="icon.png"></div>
   </div>
  
   <div class="container">
-    
-    <div class="new-cards-container">
-  <a href="BanglaSyllabus.html" class="new-card">
-    বাংলা সিলেবাস - ২০২৬
-  </a>
-</div> </div>
-    
- 
-   <div class="container">
-    <div class="new-cards-container">
-  <a href="GKSyllabus.html" class="new-card">
-    সাঃজ্ঞান সিলেবাস - ২০২৬
-  </a>
-</div> </div>
+    <!-- Main Card -->
+    <div class="main-card" id="toggleSubCards">
+      <span>লিখিত পরীক্ষার সিলেবাস - ২০২৬</span>
+      <span class="arrow" id="arrowIcon">▼</span>
+    </div>
+
+    <!-- Sub Cards -->
+    <div class="sub-cards-container" id="subCards">
+      <a href="BanglaSyllabus.html" class="sub-card">বাংলা সিলেবাস - ২০২৬</a>
+      <a href="GKSyllabus.html" class="sub-card">সাঃজ্ঞান সিলেবাস - ২০২৬</a>
+      <a href="MathSyllabus.html" class="sub-card">গণিত সিলেবাস - ২০২৬</a>
+      <a href="EnglishSyllabus.html" class="sub-card">ইংরেজি সিলেবাস - ২০২৬</a>
+    </div>
+  </div>
   
-    <div class="container">
-    <div class="new-cards-container">
-  <a href="MathSyllabus.html" class="new-card">
-    গণিত সিলেবাস - ২০২৬
-  </a>
-</div> </div>
-  
-  <div class="container">
-    <div class="new-cards-container">
-  <a href="EnglishSyllabus.html" class="new-card">
-    ইংরেজি সিলেবাস - ২০২৬
-  </a>
-</div> </div>
+  <script>
+    // Toggle visibility of sub cards and rotate arrow
+    const mainCard = document.getElementById('toggleSubCards');
+    const subCards = document.getElementById('subCards');
+    const arrowIcon = document.getElementById('arrowIcon');
     
-    
-  
-      <script>
-  document.getElementById('shareIcon').style.cursor = 'pointer';
-  document.getElementById('shareIcon').addEventListener('click', async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: document.title,
-          text: 'Cadet College Admission Study Resources ',
-          url: window.location.href
-        });
-      } catch (error) {
-        console.log('⚠️ শেয়ার ব্যর্থ হয়েছে:', error);
+    mainCard.addEventListener('click', () => {
+      const isOpen = subCards.classList.contains('open');
+      subCards.classList.toggle('open');
+      arrowIcon.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+      mainCard.classList.toggle('open', !isOpen);
+    });
+
+    // Share functionality
+    document.getElementById('shareIcon').style.cursor = 'pointer';
+    document.getElementById('shareIcon').addEventListener('click', async () => {
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: document.title,
+            text: 'Cadet College Admission Study Resources',
+            url: window.location.href
+          });
+        } catch (error) {
+          console.log('⚠️ শেয়ার ব্যর্থ হয়েছে:', error);
+        }
+      } else {
+        alert('⚠️ আপনার ব্রাউজার এই শেয়ার ফিচারটি সাপোর্ট করে না।');
       }
-    } else {
-      alert('⚠️ আপনার ব্রাউজার এই শেয়ার ফিচারটি সাপোর্ট করে না।');
-    }
-  });
-</script>
-    
+    });
+  </script>
+  
 </body>
-</html>
+                                                                </html>
